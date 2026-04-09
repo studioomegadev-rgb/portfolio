@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="hr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Galerija &mdash; Vinkovci Performance Garage</title>
+  <meta name="description" content="Portfolio završenih performance nadogradnji, ispusa po mjeri i chiptuning projekata u Vinkovci Performance Garageu." />
+  <link rel="stylesheet" href="style.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="icon" href="icon.ico" />
+
+</head>
+<body>
+
+  <!-- ======================================================
+       NAVIGACIJA
+  ====================================================== -->
+  <input type="checkbox" id="nav-toggle" aria-hidden="true" />
+
+  <nav class="navbar" role="navigation" aria-label="Glavna navigacija">
+    <a href="index.html" class="nav-brand">
+      <span class="brand-main">VPG</span>
+      <span class="brand-sub">Vinkovci Performance Garage</span>
+    </a>
+
+    <ul class="nav-links">
+      <li><a href="index.html">Početna</a></li>
+      <li><a href="services.html">Usluge</a></li>
+      <li><a href="gallery.html" class="active" aria-current="page">Galerija</a></li>
+      <li><a href="contact.html">Kontakt</a></li>
+    </ul>
+
+    <a href="contact.html" class="nav-cta">Rezerviraj Termin</a>
+
+    <label for="nav-toggle" class="nav-hamburger" aria-label="Otvori izbornik">
+      <span></span>
+      <span></span>
+      <span></span>
+    </label>
+  </nav>
+
+  <!-- Mobile drawer -->
+  <div class="nav-drawer" role="dialog" aria-label="Mobilni izbornik">
+    <a href="index.html">Početna</a>
+    <a href="services.html">Usluge</a>
+    <a href="gallery.html" class="active">Galerija</a>
+    <a href="contact.html">Kontakt</a>
+    <a href="contact.html" class="drawer-cta">Rezerviraj Termin</a>
+  </div>
+
+  <main>
+
+    <!-- ======================================================
+         ZAGLAVLJE STRANICE
+    ====================================================== -->
+    <div class="page-hero">
+      <div class="page-hero-inner">
+        <div>
+          <p class="section-label">Naš Portfolio</p>
+          <h1 class="page-hero-title">
+            Naši<br/><span class="accent">Radovi.</span>
+          </h1>
+        </div>
+        <p class="page-hero-desc">
+          Svaki projekt u ovoj galeriji predstavlja priču &mdash; vozača, cilj i
+          sate precizne izrade. Zbog toga i postojimo.
+        </p>
+      </div>
+    </div>
+
+    <!-- ======================================================
+         GALERIJA
+    ====================================================== -->
+    <section class="section" aria-labelledby="gallery-heading">
+      <h2 class="sr-only" id="gallery-heading">Završeni Projekti</h2>
+
+      <!-- Filter gumbi -->
+      <div class="gallery-filter" role="group" aria-label="Filtriraj po kategoriji">
+        <button class="filter-btn active">Svi Projekti</button>
+        <button class="filter-btn">Chiptuning</button>
+        <button class="filter-btn">Ispus po Mjeri</button>
+        <button class="filter-btn">Performansni Dijelovi</button>
+        <button class="filter-btn">Potpune Nadogradnje</button>
+        <button class="filter-btn">Dijagnostika</button>
+      </div>
+
+      <!-- Bento mreza -->
+      <div class="bento-grid" role="list" aria-label="Galerija projekata">
+
+        <article class="bento-item bento-1" role="listitem">
+          <img
+            src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=800&q=80"
+            alt="BMW M3 E46 &mdash; Faza 2 Chiptuning"
+            loading="lazy"
+          />
+          <div class="bento-item-label">
+            <div class="bento-car-tag">Faza 2 Tuning</div>
+            <div class="bento-car-name">BMW M3 E46</div>
+          </div>
+        </article>
+
+        <article class="bento-item bento-2" role="listitem">
+          <img
+            src="https://plus.unsplash.com/premium_photo-1664303847960-586318f59035?q=80&w=1074&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+            alt="Volkswagen Golf GTI &mdash; Cat-Back Ispus po Mjeri"
+            loading="lazy"
+          />
+          <div class="bento-item-label">
+            <div class="bento-car-tag">Cat-Back Ispus</div>
+            <div class="bento-car-name">VW Golf GTI</div>
+          </div>
+        </article>
+
+        <article class="bento-item bento-3" role="listitem">
+          <img
+            src="https://images.unsplash.com/photo-1503376780353-7e6692767b70?w=600&q=80"
+            alt="Porsche 911 &mdash; Potpuna Dijagnostika"
+            loading="lazy"
+          />
+          <div class="bento-item-label">
+            <div class="bento-car-tag">Dijagnostika</div>
+            <div class="bento-car-name">Porsche 911</div>
+          </div>
+        </article>
+
+        <article class="bento-item bento-4" role="listitem">
+          <img
+            src="https://images.unsplash.com/photo-1606152421802-db97b9c7a11b?w=700&q=80"
+            alt="Subaru WRX STI &mdash; Potpuna Faza 3 Nadogradnja"
+            loading="lazy"
+          />
+          <div class="bento-item-label">
+            <div class="bento-car-tag">Potpuna Faza 3</div>
+            <div class="bento-car-name">Subaru WRX STI</div>
+          </div>
+        </article>
+
+        <article class="bento-item bento-5" role="listitem">
+          <img
+            src="https://images.unsplash.com/photo-1486262715619-67b85e0b08d3?w=600&q=80"
+            alt="Ugradnja performansnih dijelova u motorni prostor"
+            loading="lazy"
+          />
+          <div class="bento-item-label">
+            <div class="bento-car-tag">Ugradnja Dijelova</div>
+            <div class="bento-car-name">Audi TT RS</div>
+          </div>
+        </article>
+
+        <article class="bento-item bento-6" role="listitem">
+          <img
+            src="https://images.unsplash.com/photo-1611859266238-4b98091d9d9b?w=800&q=80"
+            alt="Honda Civic Type R &mdash; Ventilni ispus po mjeri"
+            loading="lazy"
+          />
+          <div class="bento-item-label">
+            <div class="bento-car-tag">Ventilni Ispus</div>
+            <div class="bento-car-name">Honda Civic Type R</div>
+          </div>
+        </article>
+
+        <article class="bento-item bento-7" role="listitem">
+          <img
+            src="https://images.unsplash.com/photo-1535732820275-9ffd998cac22?w=700&q=80"
+            alt="Nissan GT-R &mdash; ECU remap i tuning"
+            loading="lazy"
+          />
+          <div class="bento-item-label">
+            <div class="bento-car-tag">ECU Remap</div>
+            <div class="bento-car-name">Nissan GT-R R35</div>
+          </div>
+        </article>
+
+        <article class="bento-item bento-8" role="listitem">
+          <img
+            src="https://images.unsplash.com/photo-1544636331-e26879cd4d9b?w=600&q=80"
+            alt="Mitsubishi EVO IX &mdash; ugradnja performansnog ovjesa"
+            loading="lazy"
+          />
+          <div class="bento-item-label">
+            <div class="bento-car-tag">Komplet Ovjesa</div>
+            <div class="bento-car-name">Mitsubishi EVO IX</div>
+          </div>
+        </article>
+
+        <article class="bento-item bento-9" role="listitem">
+          <img
+            src="https://images.unsplash.com/photo-1612825173281-9a193378527e?w=900&q=80"
+            alt="Ford Focus RS &mdash; Faza 1 tuning i usisni sustav"
+            loading="lazy"
+          />
+          <div class="bento-item-label">
+            <div class="bento-car-tag">Faza 1 i Usisni</div>
+            <div class="bento-car-name">Ford Focus RS</div>
+          </div>
+        </article>
+
+        <article class="bento-item bento-10" role="listitem">
+          <img
+            src="https://images.unsplash.com/photo-1551522435-a13afa10f103?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+            alt="Pregled radionice &mdash; Vinkovci Performance Garage"
+            loading="lazy"
+          />
+          <div class="bento-item-label">
+            <div class="bento-car-tag">Radionica</div>
+            <div class="bento-car-name">VPG Radionica</div>
+          </div>
+        </article>
+
+      </div>
+
+    </section>
+
+    <!-- ======================================================
+         BROJKE PROJEKATA
+    ====================================================== -->
+    <div style="background:var(--bg2); border-top:1px solid var(--border); border-bottom:1px solid var(--border);">
+      <div class="container stats-strip-grid" style="display:grid; grid-template-columns:repeat(4,1fr); gap:0;">
+        <div style="padding:2.5rem 2rem; border-right:1px solid var(--border); text-align:center;">
+          <div style="font-family:var(--font-head); font-size:2.5rem; font-weight:700; color:var(--accent); line-height:1; margin-bottom:0.4rem;">320+</div>
+          <div style="font-family:var(--font-cond); font-size:0.7rem; letter-spacing:0.2em; text-transform:uppercase; color:var(--fg-muted);">Chiptuning Sesija</div>
+        </div>
+        <div style="padding:2.5rem 2rem; border-right:1px solid var(--border); text-align:center;">
+          <div style="font-family:var(--font-head); font-size:2.5rem; font-weight:700; color:var(--accent); line-height:1; margin-bottom:0.4rem;">180+</div>
+          <div style="font-family:var(--font-cond); font-size:0.7rem; letter-spacing:0.2em; text-transform:uppercase; color:var(--fg-muted);">Ispusa po Mjeri</div>
+        </div>
+        <div style="padding:2.5rem 2rem; border-right:1px solid var(--border); text-align:center;">
+          <div style="font-family:var(--font-head); font-size:2.5rem; font-weight:700; color:var(--accent); line-height:1; margin-bottom:0.4rem;">450+</div>
+          <div style="font-family:var(--font-cond); font-size:0.7rem; letter-spacing:0.2em; text-transform:uppercase; color:var(--fg-muted);">Dijagnostika</div>
+        </div>
+        <div style="padding:2.5rem 2rem; text-align:center;">
+          <div style="font-family:var(--font-head); font-size:2.5rem; font-weight:700; color:var(--accent); line-height:1; margin-bottom:0.4rem;">60+</div>
+          <div style="font-family:var(--font-cond); font-size:0.7rem; letter-spacing:0.2em; text-transform:uppercase; color:var(--fg-muted);">Trkaćkih Priprema</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ======================================================
+         POZIV NA AKCIJU
+    ====================================================== -->
+    <section class="section" style="text-align:center;">
+      <p class="section-label" style="justify-content:center;">Tvoje Vozilo Čeka</p>
+      <h2 class="section-title">
+        Želiš Li Svoje Auto<br/>U Našoj <span class="accent">Galeriji?</span>
+      </h2>
+      <p class="section-body" style="margin:0 auto 2.5rem; text-align:center;">
+        Reci nam o svom projektu i zajedno izgradimo nešto o čemu će se govoriti.
+      </p>
+      <a href="contact.html" class="btn-primary">Počni Svoju Nadogradnju &#8594;</a>
+    </section>
+
+  </main>
+
+  <!-- ======================================================
+       PODNOZJE
+  ====================================================== -->
+  <footer class="site-footer" role="contentinfo">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <div class="brand-main">Vinkovci Performance Garage</div>
+        <div class="brand-sub">Građeno Drugačije</div>
+        <p>Vrhunska automehanička radionica koja služi Slavoniju i širu okolicu od 2009. Ne popravljamo samo aute &mdash; mi ih transformiramo.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Navigacija</h4>
+        <ul>
+          <li><a href="index.html">Početna</a></li>
+          <li><a href="services.html">Usluge</a></li>
+          <li><a href="gallery.html">Galerija</a></li>
+          <li><a href="contact.html">Kontakt</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Pronađi Nas</h4>
+        <address>
+          Ulica Stjepana Radića 12<br/>
+          32100 Vinkovci<br/>
+          Hrvatska<br/><br/>
+          <a href="tel:+38532000000" style="color:var(--accent);">+385 32 000 000</a>
+        </address>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      
+      <span class="footer-copy">&copy; 2024. Vinkovci Performance Garage. Sva prava pridržana.</span>
+      <span class="footer-credit">Izrađeno s <span>&#9632;</span> preciznošću.</span>
+    </div>
+  </footer>
+
+</body>
+</html>

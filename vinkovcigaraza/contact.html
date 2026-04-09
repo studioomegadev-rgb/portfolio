@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="hr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Kontakt &mdash; Vinkovci Performance Garage</title>
+  <meta name="description" content="Kontaktirajte Vinkovci Performance Garage. Rezervirajte uslugu, zatraži ponudu ili nam pošaljite poruku. Smješteni u Vinkovcima, Hrvatska." />
+  <link rel="stylesheet" href="style.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="icon" href="icon.ico" />
+
+</head>
+<body>
+
+  <!-- ======================================================
+       NAVIGACIJA
+  ====================================================== -->
+  <input type="checkbox" id="nav-toggle" aria-hidden="true" />
+
+  <nav class="navbar" role="navigation" aria-label="Glavna navigacija">
+    <a href="index.html" class="nav-brand">
+      <span class="brand-main">VPG</span>
+      <span class="brand-sub">Vinkovci Performance Garage</span>
+    </a>
+
+    <ul class="nav-links">
+      <li><a href="index.html">Početna</a></li>
+      <li><a href="services.html">Usluge</a></li>
+      <li><a href="gallery.html">Galerija</a></li>
+      <li><a href="contact.html" class="active" aria-current="page">Kontakt</a></li>
+    </ul>
+
+    <a href="contact.html" class="nav-cta">Rezerviraj Termin</a>
+
+    <label for="nav-toggle" class="nav-hamburger" aria-label="Otvori izbornik">
+      <span></span>
+      <span></span>
+      <span></span>
+    </label>
+  </nav>
+
+  <!-- Mobile drawer -->
+  <div class="nav-drawer" role="dialog" aria-label="Mobilni izbornik">
+    <a href="index.html">Početna</a>
+    <a href="services.html">Usluge</a>
+    <a href="gallery.html">Galerija</a>
+    <a href="contact.html" class="active">Kontakt</a>
+    <a href="contact.html" class="drawer-cta">Rezerviraj Termin</a>
+  </div>
+
+  <main>
+
+    <!-- ======================================================
+         ZAGLAVLJE STRANICE
+    ====================================================== -->
+    <div class="page-hero">
+      <div class="page-hero-inner">
+        <div>
+          <p class="section-label">Kontaktiraj Nas</p>
+          <h1 class="page-hero-title">
+            Razgovarajmo<br/><span class="accent">Otvoreno.</span>
+          </h1>
+        </div>
+        <p class="page-hero-desc">
+          Znaš li točno što ti treba ili tek razmišljaš &mdash; tu smo.
+          Pošalji poruku, nazovi ili nas posjeti osobno.
+        </p>
+      </div>
+    </div>
+
+    <!-- ======================================================
+         KONTAKT INFORMACIJE
+    ====================================================== -->
+    <section class="section" aria-labelledby="contact-info-heading">
+      <h2 class="sr-only" id="contact-info-heading">Kontakt Informacije</h2>
+
+      <div class="contact-hero-info">
+
+        <!-- Telefon i Adresa -->
+        <div>
+          <p class="contact-label">Nazovi Nas Direktno</p>
+          <div class="contact-big-phone">
+            <a href="tel:+38532000000">+385 32 000 000</a>
+          </div>
+          <p style="font-size:0.85rem; color:var(--fg-muted); margin-bottom:2.5rem;">Dostupni pon &ndash; pet 08:00&ndash;17:00, sub 09:00&ndash;14:00</p>
+
+          <p class="contact-label">Adresa Radionice</p>
+          <address class="contact-address">
+            Ulica Stjepana Radića 12<br/>
+            32100 Vinkovci<br/>
+            Vukovarsko-srijemska županija, Hrvatska
+          </address>
+
+          <p class="contact-label" style="margin-top:1.5rem;">E-mail</p>
+          <a href="/cdn-cgi/l/email-protection#6c05020a032c1a1c0b0d1e0d0b0942041e" style="font-size:1.1rem; color:var(--accent); transition:opacity 0.2s;">
+            <span class="__cf_email__" data-cfemail="026b6c646d4274726563706365672c6a70">[email&#160;protected]</span>
+          </a>
+        </div>
+
+        <!-- Radno Vrijeme -->
+        <div>
+          <p class="contact-label">Radno Vrijeme</p>
+          <div class="contact-hours">
+            <div class="hours-row">
+              <span class="day">Ponedjeljak</span>
+              <span>08:00 &ndash; 17:00</span>
+            </div>
+            <div class="hours-row">
+              <span class="day">Utorak</span>
+              <span>08:00 &ndash; 17:00</span>
+            </div>
+            <div class="hours-row">
+              <span class="day">Srijeda</span>
+              <span>08:00 &ndash; 17:00</span>
+            </div>
+            <div class="hours-row">
+              <span class="day">Četvrtak</span>
+              <span>08:00 &ndash; 17:00</span>
+            </div>
+            <div class="hours-row">
+              <span class="day">Petak</span>
+              <span>08:00 &ndash; 17:00</span>
+            </div>
+            <div class="hours-row">
+              <span class="day">Subota</span>
+              <span>09:00 &ndash; 14:00</span>
+            </div>
+            <div class="hours-row">
+              <span class="day">Nedjelja</span>
+              <span class="closed">Zatvoreno</span>
+            </div>
+          </div>
+
+          <div style="margin-top:2rem; padding:1.25rem; background:rgba(50,205,50,0.06); border:1px solid var(--accent-dim);">
+            <p style="font-family:var(--font-cond); font-size:0.7rem; letter-spacing:0.2em; text-transform:uppercase; color:var(--accent); margin-bottom:0.4rem;">Dolasci bez Najave Dobrođošli</p>
+            <p style="font-size:0.875rem; color:var(--fg-muted); line-height:1.6;">
+              Za sesije chiptuninga i veće radove preporučujemo prethodnu rezervaciju kako bismo zajamčili dostupnost mjesta. Dijagnostika i brzi pregledi obično su dostupni isti dan.
+            </p>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ======================================================
+         KARTA LOKACIJE
+    ====================================================== -->
+    <div class="container" style="padding-bottom:0;">
+      <p class="section-label" style="margin-bottom:1.5rem;">Pronađi Radionicu</p>
+    </div>
+
+    <div style="padding:0 2rem; max-width:1200px; margin:0 auto 5rem;">
+      <div class="map-placeholder">
+        <iframe
+          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d45268.17!2d18.8003!3d45.2319!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x475d7c9e14a7f16f%3A0x5d7ae78d12a1c23!2sVinkovci%2C%20Croatia!5e0!3m2!1shr!2shr!4v1700000000"
+          allowfullscreen=""
+          loading="lazy"
+          referrerpolicy="no-referrer-when-downgrade"
+          title="Karta lokacije Vinkovci Performance Garage"
+        ></iframe>
+        <span>Vinkovci Performance Garage &mdash; Ulica Stjepana Radića 12</span>
+      </div>
+    </div>
+
+    <!-- ======================================================
+         KONTAKT FORMA
+    ====================================================== -->
+    <section class="section" style="padding-top:0;" aria-labelledby="form-heading">
+      <div class="contact-form-wrap">
+
+        <div class="form-intro">
+          <p class="section-label">Pošalji Poruku</p>
+          <h2 class="section-title" id="form-heading">
+            Rezerviraj<br/><span class="accent">Termin.</span>
+          </h2>
+          <p class="section-body">
+            Ispuni obrazac s pojedinostima i javit ćemo ti se unutar jednog
+            radnog dana s dostupnošću termina i cjenovnikom.
+          </p>
+          <p class="form-note">
+            &#9632; Sve upite osobno obrađuje naš tim.<br/>
+            &#9632; Za hitne slučajeve nazovi nas direktno.<br/>
+            &#9632; Trkačke pripreme i dane na stazi potrebno je najaviti 72 sata unaprijed.
+          </p>
+
+          <div style="margin-top:2.5rem; padding-top:2rem; border-top:1px solid var(--border);">
+            <p class="contact-label" style="margin-bottom:1rem;">Ili Pronađi Nas Na</p>
+            <div style="display:flex; gap:0.75rem; flex-wrap:wrap;">
+              <a href="#" style="display:inline-flex; align-items:center; gap:0.5rem; font-family:var(--font-cond); font-size:0.75rem; letter-spacing:0.15em; text-transform:uppercase; padding:0.5rem 1rem; border:1px solid var(--border-hi); color:var(--fg-muted); transition:all 0.25s;">Instagram</a>
+              <a href="#" style="display:inline-flex; align-items:center; gap:0.5rem; font-family:var(--font-cond); font-size:0.75rem; letter-spacing:0.15em; text-transform:uppercase; padding:0.5rem 1rem; border:1px solid var(--border-hi); color:var(--fg-muted); transition:all 0.25s;">Facebook</a>
+              <a href="#" style="display:inline-flex; align-items:center; gap:0.5rem; font-family:var(--font-cond); font-size:0.75rem; letter-spacing:0.15em; text-transform:uppercase; padding:0.5rem 1rem; border:1px solid var(--border-hi); color:var(--fg-muted); transition:all 0.25s;">YouTube</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- FORMA -->
+        <div>
+          <form
+            class="contact-form"
+            action="#"
+            method="POST"
+            aria-label="Obrazac za upit o usluzi"
+            novalidate
+          >
+
+            <div class="form-row">
+              <div class="form-group">
+                <label for="field-name">Ime i Prezime *</label>
+                <input
+                  type="text"
+                  id="field-name"
+                  name="name"
+                  placeholder="Ivan Horvat"
+                  required
+                  autocomplete="name"
+                />
+              </div>
+
+              <div class="form-group">
+                <label for="field-email">E-mail Adresa *</label>
+                <input
+                  type="email"
+                  id="field-email"
+                  name="email"
+                  placeholder="ivan@primjer.hr"
+                  required
+                  autocomplete="email"
+                />
+              </div>
+            </div>
+
+            <div class="form-row">
+              <div class="form-group">
+                <label for="field-phone">Broj Telefona</label>
+                <input
+                  type="tel"
+                  id="field-phone"
+                  name="phone"
+                  placeholder="+385 9X XXX XXXX"
+                  autocomplete="tel"
+                />
+              </div>
+
+              <div class="form-group">
+                <label for="field-vehicle">Vozilo *</label>
+                <input
+                  type="text"
+                  id="field-vehicle"
+                  name="vehicle"
+                  placeholder="npr. BMW M3 E46, 2001."
+                  required
+                />
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="field-service">Potrebna Usluga *</label>
+              <select id="field-service" name="service" required>
+                <option value="" disabled selected>&mdash; Odaberi uslugu &mdash;</option>
+                <option value="chiptuning">Chiptuning / ECU Remap</option>
+                <option value="dijagnostika">Dijagnostika i Traženje Kvarova</option>
+                <option value="dijelovi">Nabava i Ugradnja Performansnih Dijelova</option>
+                <option value="ispus">Izrada Ispusa po Mjeri</option>
+                <option value="pred-kupnju">Pregled Vozila Pred Kupnju</option>
+                <option value="trkacka-priprema">Trkačka Priprema / Dan na Stazi</option>
+                <option value="opci-upit">Opći Upit</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label for="field-budget">Okvirni Buđet</label>
+              <select id="field-budget" name="budget">
+                <option value="" disabled selected>&mdash; Opcionalno: Odaberi raspon &mdash;</option>
+                <option value="ispod-200">Ispod 200 &euro;</option>
+                <option value="200-500">200 &euro; &ndash; 500 &euro;</option>
+                <option value="500-1000">500 &euro; &ndash; 1.000 &euro;</option>
+                <option value="1000-3000">1.000 &euro; &ndash; 3.000 &euro;</option>
+                <option value="3000-plus">3.000 &euro; i više</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label for="field-message">Opiši Nam Svoj Projekt *</label>
+              <textarea
+                id="field-message"
+                name="message"
+                placeholder="Opiši što želiš postići &mdash; trenutne modifikacije, ciljeve, poznate probleme. Što nam više detalja daš, bolje ti možemo pomoći."
+                required
+              ></textarea>
+            </div>
+
+            <div class="form-group" style="flex-direction:row; align-items:flex-start; gap:0.75rem;">
+              <input type="checkbox" id="field-consent" name="consent" required style="width:16px; height:16px; margin-top:3px; accent-color:var(--accent); flex-shrink:0;" />
+              <label for="field-consent" style="font-size:0.8rem; color:var(--fg-muted); letter-spacing:0; text-transform:none; line-height:1.6; cursor:pointer;">
+                Suglasan/na sam da se moji podaci koriste za obradu ovog upita. Nikada nećemo dijeliti tvoje podatke s trećim stranama.
+              </label>
+            </div>
+
+            <div class="form-submit">
+              <button type="submit" class="btn-primary">
+                Pošalji Upit &#8594;
+              </button>
+            </div>
+
+          </form>
+        </div>
+
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ======================================================
+       PODNOZJE
+  ====================================================== -->
+  <footer class="site-footer" role="contentinfo">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <div class="brand-main">Vinkovci Performance Garage</div>
+        <div class="brand-sub">Građeno Drugačije</div>
+        <p>Vrhunska automehaničarska radionica koja služi Slavoniju i širu okolicu od 2009. Ne popravljamo samo aute &mdash; mi ih transformiramo.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Navigacija</h4>
+        <ul>
+          <li><a href="index.html">Početna</a></li>
+          <li><a href="services.html">Usluge</a></li>
+          <li><a href="gallery.html">Galerija</a></li>
+          <li><a href="contact.html">Kontakt</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Pronađi Nas</h4>
+        <address>
+          Ulica Stjepana Radića 12<br/>
+          32100 Vinkovci<br/>
+          Hrvatska<br/><br/>
+          <a href="tel:+38532000000" style="color:var(--accent);">+385 32 000 000</a>
+        </address>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span class="footer-copy">&copy; 2024. Vinkovci Performance Garage. Sva prava pridržana.</span>

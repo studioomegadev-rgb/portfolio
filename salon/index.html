@@ -1,0 +1,878 @@
+<!DOCTYPE html>
+<html lang="hr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Lumiere Studio — Frizerski & Beauty Salon</title>
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    /* ===== HERO: SPLIT SCREEN ===== */
+    .hero {
+      min-height: 100vh;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-vizual {
+      position: relative;
+      background: linear-gradient(135deg, #1a1a1a 0%, #2c2416 50%, #1a1a1a 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+    }
+
+    .hero-vizual::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(ellipse at 30% 50%, rgba(212,175,55,0.12) 0%, transparent 60%),
+        radial-gradient(ellipse at 80% 20%, rgba(212,175,55,0.06) 0%, transparent 50%);
+    }
+
+    .hero-vizual-ornament {
+      position: relative;
+      z-index: 1;
+      text-align: center;
+    }
+
+    .hero-ornament-krug {
+      width: 380px;
+      height: 380px;
+      border: 1px solid rgba(212,175,55,0.2);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+    }
+
+    .hero-ornament-krug::before {
+      content: '';
+      position: absolute;
+      width: 320px;
+      height: 320px;
+      border: 1px solid rgba(212,175,55,0.12);
+      border-radius: 50%;
+    }
+
+    .hero-ornament-krug::after {
+      content: '';
+      position: absolute;
+      width: 440px;
+      height: 440px;
+      border: 1px solid rgba(212,175,55,0.06);
+      border-radius: 50%;
+    }
+
+    .hero-slika-placeholder {
+      width: 280px;
+      height: 280px;
+      border-radius: 50%;
+      background: linear-gradient(145deg, #2a2418, #3d3420);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 0.75rem;
+      border: 1px solid rgba(212,175,55,0.15);
+    }
+
+    .hero-slika-placeholder svg {
+      width: 60px;
+      height: 60px;
+      opacity: 0.3;
+      fill: var(--zlato);
+    }
+
+    .hero-slika-placeholder p {
+      font-size: 0.65rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: rgba(212,175,55,0.4);
+      font-family: var(--font-tijelo);
+    }
+
+    /* Lebdeći badge */
+    .hero-badge {
+      position: absolute;
+      bottom: 15%;
+      right: -1rem;
+      background: var(--zlato);
+      color: var(--crna);
+      padding: 1.25rem 1.5rem;
+      text-align: center;
+      z-index: 2;
+    }
+
+    .hero-badge strong {
+      display: block;
+      font-family: var(--font-naslov);
+      font-size: 2rem;
+      line-height: 1;
+    }
+
+    .hero-badge span {
+      font-size: 0.6rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      font-weight: 600;
+    }
+
+    /* Hero CTA strana */
+    .hero-cta {
+      background: var(--crna);
+      display: flex;
+      align-items: center;
+      padding: 6rem 4rem 4rem;
+      position: relative;
+    }
+
+    .hero-cta::before {
+      content: '';
+      position: absolute;
+      top: 0; right: 0;
+      width: 1px;
+      height: 100%;
+      background: linear-gradient(to bottom, transparent, rgba(212,175,55,0.3), transparent);
+    }
+
+    .hero-cta-sadrzaj { max-width: 460px; }
+
+    .hero-tag {
+      font-size: 0.68rem;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: var(--zlato);
+      font-weight: 500;
+      font-family: var(--font-tijelo);
+      margin-bottom: 1.5rem;
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    .hero-tag::before {
+      content: '';
+      display: inline-block;
+      width: 30px;
+      height: 1px;
+      background: var(--zlato);
+    }
+
+    .hero-naslov {
+      font-family: var(--font-naslov);
+      font-size: clamp(2.8rem, 5vw, 4.5rem);
+      color: var(--bijela);
+      line-height: 1.1;
+      margin-bottom: 1.5rem;
+    }
+
+    .hero-naslov em {
+      color: var(--zlato);
+      font-style: italic;
+    }
+
+    .hero-opis {
+      color: rgba(255,255,255,0.55);
+      font-size: 0.9rem;
+      line-height: 1.9;
+      margin-bottom: 2.5rem;
+    }
+
+    .hero-gumbi {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+      margin-bottom: 3rem;
+    }
+
+    .hero-stats {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 0;
+      border-top: 1px solid rgba(255,255,255,0.08);
+      padding-top: 2rem;
+    }
+
+    .hero-stat {
+      text-align: center;
+      padding: 0 1rem;
+      border-right: 1px solid rgba(255,255,255,0.08);
+    }
+
+    .hero-stat:last-child { border-right: none; }
+    .hero-stat:first-child { padding-left: 0; }
+
+    .hero-stat strong {
+      display: block;
+      font-family: var(--font-naslov);
+      font-size: 2rem;
+      color: var(--zlato);
+      line-height: 1;
+      margin-bottom: 0.4rem;
+    }
+
+    .hero-stat span {
+      font-size: 0.65rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.4);
+    }
+
+    /* Scroll indikator */
+    .scroll-indikator {
+      position: absolute;
+      bottom: 2rem;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.5rem;
+      color: rgba(255,255,255,0.4);
+      font-size: 0.6rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+    }
+
+    .scroll-indikator-linija {
+      width: 1px;
+      height: 50px;
+      background: linear-gradient(to bottom, rgba(212,175,55,0.6), transparent);
+      animation: scroll-puls 2s ease-in-out infinite;
+    }
+
+    @keyframes scroll-puls {
+      0%, 100% { opacity: 0.4; transform: scaleY(1); }
+      50% { opacity: 1; transform: scaleY(1.2); }
+    }
+
+    /* ===== USLUGE TEASER ===== */
+    .usluge-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 0;
+    }
+
+    .usluga-kartica {
+      padding: 3.5rem 2.5rem;
+      border: 1px solid var(--siva-srednja);
+      margin: -1px 0 0 -1px;
+      position: relative;
+      overflow: hidden;
+      cursor: pointer;
+      transition: var(--prijelaz);
+    }
+
+    .usluga-kartica::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: var(--crna);
+      transform: scaleY(0);
+      transform-origin: bottom;
+      transition: transform 0.4s ease;
+      z-index: 0;
+    }
+
+    .usluga-kartica:hover::before { transform: scaleY(1); }
+
+    .usluga-kartica > * { position: relative; z-index: 1; }
+
+    .usluga-broj {
+      font-family: var(--font-naslov);
+      font-size: 3.5rem;
+      color: rgba(212,175,55,0.15);
+      line-height: 1;
+      margin-bottom: 1rem;
+      transition: color 0.4s;
+    }
+
+    .usluga-kartica:hover .usluga-broj { color: rgba(212,175,55,0.08); }
+
+    .usluga-ikona {
+      width: 40px;
+      height: 40px;
+      margin-bottom: 1.25rem;
+      fill: var(--zlato);
+    }
+
+    .usluga-naziv {
+      font-family: var(--font-naslov);
+      font-size: 1.4rem;
+      margin-bottom: 0.75rem;
+      color: var(--crna);
+      transition: color 0.4s;
+    }
+
+    .usluga-kartica:hover .usluga-naziv { color: var(--bijela); }
+
+    .usluga-opis {
+      font-size: 0.85rem;
+      color: var(--siva-tekst);
+      line-height: 1.8;
+      transition: color 0.4s;
+    }
+
+    .usluga-kartica:hover .usluga-opis { color: rgba(255,255,255,0.6); }
+
+    .usluga-veza {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      margin-top: 1.5rem;
+      font-size: 0.7rem;
+      font-weight: 600;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--zlato);
+      transition: gap 0.3s;
+    }
+
+    .usluga-kartica:hover .usluga-veza { gap: 0.8rem; }
+
+    /* ===== O SALONU ===== */
+    .o-nama-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 6rem;
+      align-items: center;
+    }
+
+    .o-nama-slika {
+      position: relative;
+    }
+
+    .o-nama-slika-glavna {
+      width: 100%;
+      height: 520px;
+      background: linear-gradient(135deg, #e8e4dc 0%, #d4cfc7 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    .o-nama-slika-glavna svg {
+      width: 50px;
+      height: 50px;
+      fill: rgba(26,26,26,0.2);
+    }
+
+    .o-nama-slika-glavna p {
+      font-size: 0.65rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: rgba(26,26,26,0.35);
+    }
+
+    .o-nama-slika-ukras {
+      position: absolute;
+      bottom: -2rem;
+      right: -2rem;
+      width: 200px;
+      height: 200px;
+      background: var(--crna);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+    }
+
+    .o-nama-slika-ukras strong {
+      font-family: var(--font-naslov);
+      font-size: 3rem;
+      color: var(--zlato);
+      line-height: 1;
+    }
+
+    .o-nama-slika-ukras span {
+      font-size: 0.65rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.5);
+      text-align: center;
+    }
+
+    .o-nama-sadrzaj { padding: 2rem 0; }
+
+    .o-nama-lista {
+      margin: 2rem 0;
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    .o-nama-lista li {
+      display: flex;
+      align-items: flex-start;
+      gap: 1rem;
+      font-size: 0.9rem;
+      color: var(--siva-tekst);
+    }
+
+    .o-nama-lista li::before {
+      content: '';
+      width: 6px;
+      height: 6px;
+      background: var(--zlato);
+      border-radius: 50%;
+      margin-top: 8px;
+      flex-shrink: 0;
+    }
+
+    /* ===== TESTIMONIJALI ===== */
+    .testimonijali { position: relative; overflow: hidden; }
+
+    .testimonijali-ukras {
+      position: absolute;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background:
+        radial-gradient(ellipse at 20% 50%, rgba(212,175,55,0.04) 0%, transparent 60%),
+        radial-gradient(ellipse at 80% 50%, rgba(212,175,55,0.04) 0%, transparent 60%);
+      pointer-events: none;
+    }
+
+    .slider {
+      position: relative;
+      max-width: 800px;
+      margin: 0 auto;
+      overflow: hidden;
+    }
+
+    .slider-zapisi {
+      display: flex;
+      transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .testimonijal {
+      min-width: 100%;
+      text-align: center;
+      padding: 0 2rem;
+    }
+
+    .testimonijal-navod {
+      font-family: var(--font-naslov);
+      font-size: clamp(1.1rem, 2.5vw, 1.6rem);
+      color: var(--bijela);
+      line-height: 1.6;
+      font-style: italic;
+      margin-bottom: 2rem;
+      opacity: 0.9;
+    }
+
+    .testimonijal-zvjezdice {
+      display: flex;
+      justify-content: center;
+      gap: 4px;
+      margin-bottom: 1.5rem;
+    }
+
+    .zvjezdica {
+      width: 14px;
+      height: 14px;
+      fill: var(--zlato);
+    }
+
+    .testimonijal-autor strong {
+      display: block;
+      color: var(--bijela);
+      font-size: 0.85rem;
+      font-weight: 500;
+      margin-bottom: 0.25rem;
+    }
+
+    .testimonijal-autor span {
+      font-size: 0.7rem;
+      color: rgba(255,255,255,0.4);
+      letter-spacing: 0.1em;
+    }
+
+    .slider-kontrole {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 1rem;
+      margin-top: 2.5rem;
+    }
+
+    .slider-gumb {
+      width: 42px;
+      height: 42px;
+      border: 1px solid rgba(255,255,255,0.15);
+      background: transparent;
+      color: rgba(255,255,255,0.6);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: var(--prijelaz);
+      font-size: 1rem;
+    }
+
+    .slider-gumb:hover {
+      border-color: var(--zlato);
+      color: var(--zlato);
+    }
+
+    .slider-tocke {
+      display: flex;
+      gap: 8px;
+    }
+
+    .tocka {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.25);
+      cursor: pointer;
+      transition: background 0.3s;
+      border: none;
+    }
+
+    .tocka.aktivna { background: var(--zlato); }
+
+    /* ===== RESPONSIVE ===== */
+    @media (max-width: 1000px) {
+      .hero { grid-template-columns: 1fr; min-height: auto; }
+      .hero-vizual { display: none; }
+      .hero-cta {
+        padding: 8rem 2rem 5rem;
+        min-height: 100vh;
+        background: linear-gradient(135deg, #1a1a1a 0%, #2c2416 60%, #1a1a1a 100%);
+      }
+      .hero-cta-sadrzaj { max-width: 100%; }
+      .usluge-grid { grid-template-columns: 1fr; }
+      .o-nama-grid { grid-template-columns: 1fr; gap: 3rem; }
+      .o-nama-slika { display: none; }
+    }
+
+    @media (max-width: 700px) {
+      .usluge-grid { grid-template-columns: 1fr; }
+      .hero-stats { grid-template-columns: repeat(3, 1fr); }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAVIGACIJA -->
+  <nav class="nav prozirna">
+    <a href="index.html" class="nav-logo">Lumiere<span>Studio</span></a>
+    <ul class="nav-links">
+      <li><a href="index.html">Početna</a></li>
+      <li><a href="usluge.html">Usluge</a></li>
+      <li><a href="galerija.html">Galerija</a></li>
+      <li><a href="kontakt.html">Kontakt</a></li>
+      <li><a href="kontakt.html" class="gumb gumb-primarni">Rezerviraj</a></li>
+    </ul>
+    <button class="nav-hamburger" aria-label="Izbornik">
+      <span></span><span></span><span></span>
+    </button>
+  </nav>
+
+  <!-- HERO: SPLIT SCREEN -->
+  <section class="hero">
+    <!-- Vizualna strana -->
+    <div class="hero-vizual">
+      <div class="hero-vizual-ornament">
+        <div class="hero-ornament-krug">
+          <img src="https://images.unsplash.com/photo-1570964995516-21cb0f135f95?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTJ8fGhhaXJ8ZW58MHx8MHx8fDA%3D%3D" alt="Premium frizerski salon" style="width:280px;height:280px;border-radius:50%;object-fit:cover;border:1px solid rgba(212,175,55,0.15);" />
+        </div>
+      </div>
+      <div class="hero-badge">
+        <strong>12+</strong>
+        <span>godina iskustva</span>
+      </div>
+    </div>
+
+    <!-- CTA strana -->
+    <div class="hero-cta">
+      <div class="hero-cta-sadrzaj">
+        <div class="hero-tag">Premium frizerski salon</div>
+        <h1 class="hero-naslov">
+          Vaša ljepota,<br>naša <em>strast</em>
+        </h1>
+        <p class="hero-opis">
+          Dobrodošli u Lumiere Studio — prostor gdje se tradicija susreće s modernim
+          pristupom. Svaki posjet je personalizirano iskustvo osmišljeno posebno za vas.
+        </p>
+        <div class="hero-gumbi">
+          <a href="kontakt.html" class="gumb gumb-primarni">Rezerviraj termin</a>
+          <a href="usluge.html" class="gumb gumb-sekundarni">Pogledaj usluge</a>
+        </div>
+        <div class="hero-stats">
+          <div class="hero-stat">
+            <strong>4.9</strong>
+            <span>Ocjena klijenata</span>
+          </div>
+          <div class="hero-stat">
+            <strong>2k+</strong>
+            <span>Zadovoljnih klijenata</span>
+          </div>
+          <div class="hero-stat">
+            <strong>15</strong>
+            <span>Stručnjaka</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="scroll-indikator">
+      <div class="scroll-indikator-linija"></div>
+      <span>Skrolajte</span>
+    </div>
+  </section>
+
+  <!-- USLUGE TEASER -->
+  <section class="sekcija">
+    <div class="kontejner">
+      <div class="zaglavlje-sekcija animiraj">
+        <p class="podnaslov-sekcija">Što nudimo</p>
+        <h2 class="naslov-sekcija">Naše signature usluge</h2>
+        <div class="linija-zlato"></div>
+        <p class="opis-sekcija">
+          Od klasičnih frizura do suvremenih tretmana, nudimo sveobuhvatnu paletu usluga
+          prilagođenih vašim potrebama i željama.
+        </p>
+      </div>
+
+      <div class="usluge-grid">
+        <div class="usluga-kartica animiraj" style="transition-delay:0.1s">
+          <div class="usluga-broj">01</div>
+          <svg class="usluga-ikona" viewBox="0 0 24 24"><path d="M15.5 2.1L11.42 6.18l2.13 2.12 1.41-1.41 1.41 1.42-2.83 2.82-1.41-1.41L9.3 11.54C9.74 12.3 10 13.12 10 14c0 2.76-2.24 5-5 5S0 16.76 0 14s2.24-5 5-5c.88 0 1.7.26 2.46.7l8.49-8.49 1.55 1.89zM5 11c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3zm14.03.97l-2.13-2.12-1.41 1.42 2.12 2.12-1.41 1.42-2.12-2.12-1.42 1.41 2.13 2.12L13 18l5 5 5-5-3.97-7.03z"/></svg>
+          <h3 class="usluga-naziv">Frizura & Styling</h3>
+          <p class="usluga-opis">Šišanje, pranje, sušenje i styling za sve tipove kose. Klasični i moderni pristupi prilagođeni vašem licu i stilu.</p>
+          <a href="usluge.html" class="usluga-veza">Više detalja &rarr;</a>
+        </div>
+
+        <div class="usluga-kartica animiraj" style="transition-delay:0.2s">
+          <div class="usluga-broj">02</div>
+          <svg class="usluga-ikona" viewBox="0 0 24 24"><path d="M12 3c-4.97 0-9 4.03-9 9s4.03 9 9 9 9-4.03 9-9c0-.46-.04-.92-.1-1.36-.98 1.37-2.58 2.26-4.4 2.26-2.98 0-5.4-2.42-5.4-5.4 0-1.81.89-3.42 2.26-4.4-.44-.06-.9-.1-1.36-.1z"/></svg>
+          <h3 class="usluga-naziv">Bojanje & Balayage</h3>
+          <p class="usluga-opis">Precizno bojanje s premium bojama bez amonijaka. Balayage, ombre i highlight tehnike za prirodan izgled.</p>
+          <a href="usluge.html" class="usluga-veza">Više detalja &rarr;</a>
+        </div>
+
+        <div class="usluga-kartica animiraj" style="transition-delay:0.3s">
+          <div class="usluga-broj">03</div>
+          <svg class="usluga-ikona" viewBox="0 0 24 24"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-7 14l-5-5 1.41-1.41L12 14.17l7.59-7.59L21 8l-9 9z"/></svg>
+          <h3 class="usluga-naziv">Nokti & Manikura</h3>
+          <p class="usluga-opis">Klasična i gel manikura, pedikura i nail art. Koristimo isključivo certificirane i sigurne materijale vrhunske kvalitete.</p>
+          <a href="usluge.html" class="usluga-veza">Više detalja &rarr;</a>
+        </div>
+
+        <div class="usluga-kartica animiraj" style="transition-delay:0.1s">
+          <div class="usluga-broj">04</div>
+          <svg class="usluga-ikona" viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+          <h3 class="usluga-naziv">Tretmani kose</h3>
+          <p class="usluga-opis">Keratin, botoks za kosu i dubinska njega. Obnavljamo oštećenu kosu i vraćamo joj sjaj, elastičnost i zdravlje.</p>
+          <a href="usluge.html" class="usluga-veza">Više detalja &rarr;</a>
+        </div>
+
+        <div class="usluga-kartica animiraj" style="transition-delay:0.2s">
+          <div class="usluga-broj">05</div>
+          <svg class="usluga-ikona" viewBox="0 0 24 24"><path d="M9.5 6.5v3h-3v-3h3M11 5H5v6h6V5zm-1.5 9.5v3h-3v-3h3M11 13H5v6h6v-6zm6.5-6.5v3h-3v-3h3M19 5h-6v6h6V5zm-6 8h1.5v1.5H13V13zm1.5 1.5H16V16h-1.5v-1.5zM16 13h1.5v1.5H16V13zm-3 3h1.5v1.5H13V16zm1.5 1.5H16V19h-1.5v-1.5zM16 16h1.5v1.5H16V16zm1.5-1.5H19V16h-1.5v-1.5zm0 3H19V19h-1.5v-1.5zM22 7h-2V4h-3V2h5v5zm0 15v-5h-2v3h-3v2h5zM2 22h5v-2H4v-3H2v5zM2 2v5h2V4h3V2H2z"/></svg>
+          <h3 class="usluga-naziv">Beauty tretmani</h3>
+          <p class="usluga-opis">Waxing, depilacija i oblikovanje obrva. Kompletna beauty njega lica i tijela u opuštenom i luksuznom okruženju.</p>
+          <a href="usluge.html" class="usluga-veza">Više detalja &rarr;</a>
+        </div>
+
+        <div class="usluga-kartica animiraj" style="transition-delay:0.3s">
+          <div class="usluga-broj">06</div>
+          <svg class="usluga-ikona" viewBox="0 0 24 24"><path d="M17 12h-5v5h5v-5zM16 1v2H8V1H6v2H5c-1.11 0-1.99.9-1.99 2L3 19c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2h-1V1h-2zm3 18H5V8h14v11z"/></svg>
+          <h3 class="usluga-naziv">Vjenčani styling</h3>
+          <p class="usluga-opis">Posebni paketi za mladenke i vjenčanice. Svečane frizure, makeup i kompletna priprema za vaš najvažniji dan.</p>
+          <a href="usluge.html" class="usluga-veza">Više detalja &rarr;</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- O SALONU -->
+  <section class="sekcija sekcija-svijetla">
+    <div class="kontejner">
+      <div class="o-nama-grid">
+        <div class="o-nama-slika animiraj-lijevo">
+          <img src="https://images.unsplash.com/photo-1551731423-3f14c9947bb1?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTN8fGhhaXJ8ZW58MHx8MHx8fDA%3D%3D" alt="Fotografija salona" style="width:100%;height:520px;object-fit:cover;" />
+          <div class="o-nama-slika-ukras">
+            <strong>15</strong>
+            <span>Strucnih stilista</span>
+          </div>
+        </div>
+
+        <div class="o-nama-sadrzaj animiraj-desno">
+          <p class="podnaslov-sekcija">O nama</p>
+          <h2 class="naslov-sekcija">Dvanaest godina predanosti ljepoti</h2>
+          <div class="linija-zlato"></div>
+          <p class="opis-sekcija">
+            Lumiere Studio osnovan je 2012. godine s jednom jasnom vizijom: stvoriti salon
+            koji kombinira vrhunsku stručnost, opuštajuću atmosferu i iskrenu brigu prema
+            svakom klijentu.
+          </p>
+          <ul class="o-nama-lista">
+            <li>Certificirani stilisti s međunarodnim iskustvom i kontinuiranim usavršavanjem</li>
+            <li>Isključivo premium kozmetički proizvodi bez štetnih kemikalija</li>
+            <li>Individualni pristup i personalizirani savjet za svaki tip kose</li>
+            <li>Udoban i luksuzno opremljen prostor u srcu grada</li>
+          </ul>
+          <a href="kontakt.html" class="gumb gumb-tamni">Rezerviraj posjetu</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TESTIMONIJALI -->
+  <section class="sekcija sekcija-tamna testimonijali">
+    <div class="testimonijali-ukras"></div>
+    <div class="kontejner">
+      <div class="zaglavlje-sekcija animiraj">
+        <p class="podnaslov-sekcija">Što klijenti kažu</p>
+        <h2 class="naslov-sekcija" style="color:var(--bijela)">Iskustva naših klijentica</h2>
+        <div class="linija-zlato"></div>
+      </div>
+
+      <div class="slider animiraj">
+        <div class="slider-zapisi" id="sliderZapisi">
+          <div class="testimonijal">
+            <div class="testimonijal-zvjezdice">
+              <svg class="zvjezdica" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+              <svg class="zvjezdica" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+              <svg class="zvjezdica" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+              <svg class="zvjezdica" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+              <svg class="zvjezdica" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+            </div>
+            <p class="testimonijal-navod">
+              "Dolazim u Lumiere Studio već tri godine i svaki put odlazim potpuno zadovoljna.
+              Stilisti točno znaju što želim, čak i kad to ja sama ne znam objasniti."
+            </p>
+            <div class="testimonijal-autor">
+              <strong>Martina Horvat</strong>
+              <span>Vjerna klijentica</span>
+            </div>
+          </div>
+
+          <div class="testimonijal">
+            <div class="testimonijal-zvjezdice">
+              <svg class="zvjezdica" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+              <svg class="zvjezdica" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+              <svg class="zvjezdica" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+              <svg class="zvjezdica" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+              <svg class="zvjezdica" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+            </div>
+            <p class="testimonijal-navod">
+              "Napravila sam balayage koji sam oduvijek sanjala. Rezultat je bio savršen
+              prvi put. Preporučujem svima koji traže salon koji zaista sluša klijenta."
+            </p>
+            <div class="testimonijal-autor">
+              <strong>Ana Kovačević</strong>
+              <span>Klijentica balayage tretmana</span>
+            </div>
+          </div>
+
+          <div class="testimonijal">
+            <div class="testimonijal-zvjezdice">
+              <svg class="zvjezdica" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+              <svg class="zvjezdica" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+              <svg class="zvjezdica" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+              <svg class="zvjezdica" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+              <svg class="zvjezdica" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+            </div>
+            <p class="testimonijal-navod">
+              "Za vjenčanje sam odabrala Lumiere Studio i to je bila najbolja odluka. Frizura
+              je bila savršena cijeli dan. Zahvalna sam cijelom timu na profesionalnosti i strpljenju."
+            </p>
+            <div class="testimonijal-autor">
+              <strong>Lucija Petrović</strong>
+              <span>Mladenka</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="slider-kontrole">
+          <button class="slider-gumb" id="sliderPrethodna" aria-label="Prethodni">&#8592;</button>
+          <div class="slider-tocke" id="sliderTocke">
+            <button class="tocka aktivna"></button>
+            <button class="tocka"></button>
+            <button class="tocka"></button>
+          </div>
+          <button class="slider-gumb" id="sliderSljedeca" aria-label="Sljedeci">&#8594;</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="footer-grid">
+      <div>
+        <div class="footer-logo">Lumiere<span>Studio</span></div>
+        <p>Premium frizerski i beauty salon u srcu grada. Posvećeni vašoj ljepoti od 2012. godine.</p>
+      </div>
+      <div>
+        <h4>Brze veze</h4>
+        <ul class="footer-links">
+          <li><a href="index.html">Početna</a></li>
+          <li><a href="usluge.html">Usluge i cijene</a></li>
+          <li><a href="galerija.html">Galerija</a></li>
+          <li><a href="kontakt.html">Rezervacija</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Kontakt</h4>
+        <ul class="footer-links">
+          <li><a href="tel:+38512345678">+385 1 234 5678</a></li>
+          <li><a href="mailto:info@lumierestudio.hr">info@lumierestudio.hr</a></li>
+          <li>Ilica 42, Zagreb</li>
+          <li>Pon - Sub: 9:00 - 20:00</li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-dno">
+      <span>2024 Lumiere Studio. Sva prava pridržana.</span>
+      <span>Dizajnirano s ljubavlju u Zagrebu</span>
+    </div>
+  </footer>
+
+  <!-- PLUTAJUCI GUMBI -->
+  <div class="plutajuci-gumbi">
+    <a href="https://wa.me/38512345678" class="plutajuci-gumb plutajuci-gumb-whatsapp" target="_blank" rel="noopener" aria-label="WhatsApp">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+    </a>
+    <a href="tel:+38512345678" class="plutajuci-gumb plutajuci-gumb-poziv" aria-label="Pozovi">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="var(--crna)"><path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/></svg>
+    </a>
+  </div>
+
+  <!-- BACK TO TOP -->
+  <button class="natrag-gore" aria-label="Natrag na vrh">&#8593;</button>
+
+  <script src="script.js"></script>
+  <script>
+    // ===== TESTIMONIJAL SLIDER =====
+    (function () {
+      const zapisi = document.getElementById('sliderZapisi');
+      const tocke = document.querySelectorAll('.tocka');
+      let trenutni = 0;
+      const ukupno = tocke.length;
+
+      function idi(index) {
+        trenutni = (index + ukupno) % ukupno;
+        zapisi.style.transform = `translateX(-${trenutni * 100}%)`;
+        tocke.forEach((t, i) => t.classList.toggle('aktivna', i === trenutni));
+      }
+
+      document.getElementById('sliderPrethodna').addEventListener('click', () => idi(trenutni - 1));
+      document.getElementById('sliderSljedeca').addEventListener('click', () => idi(trenutni + 1));
+      tocke.forEach((t, i) => t.addEventListener('click', () => idi(i)));
+
+      setInterval(() => idi(trenutni + 1), 5000);
+    })();
+  </script>
+</body>
+</html>

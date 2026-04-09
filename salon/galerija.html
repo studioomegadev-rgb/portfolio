@@ -1,0 +1,580 @@
+<!DOCTYPE html>
+<html lang="hr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Galerija — Lumiere Studio</title>
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    /* ===== HERO ===== */
+    .stranica-hero {
+      background: var(--crna);
+      padding: 10rem 2rem 5rem;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .stranica-hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse at 50% 70%, rgba(212,175,55,0.07) 0%, transparent 60%);
+    }
+    .stranica-hero > * { position: relative; z-index: 1; }
+    .stranica-hero h1 { font-family: var(--font-naslov); font-size: clamp(2.5rem,5vw,4rem); color: var(--bijela); margin-bottom: 1rem; }
+    .stranica-hero h1 em { color: var(--zlato); font-style: italic; }
+    .stranica-hero p { color: rgba(255,255,255,0.55); max-width: 520px; margin: 0 auto; font-size: 0.9rem; line-height: 1.8; }
+
+    /* ===== FILTER ===== */
+    .galerija-filter {
+      display: flex;
+      justify-content: center;
+      gap: 0.5rem;
+      flex-wrap: wrap;
+      margin-bottom: 3.5rem;
+    }
+
+    .filter-gumb {
+      padding: 0.6rem 1.5rem;
+      font-size: 0.7rem;
+      font-weight: 600;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      cursor: pointer;
+      border: 1px solid var(--siva-srednja);
+      background: transparent;
+      color: var(--siva-tekst);
+      transition: var(--prijelaz);
+      font-family: var(--font-tijelo);
+    }
+
+    .filter-gumb:hover { border-color: var(--crna); color: var(--crna); }
+    .filter-gumb.aktivan { background: var(--crna); color: var(--bijela); border-color: var(--crna); }
+
+    /* ===== MASONRY GRID ===== */
+    .masonry {
+      columns: 3;
+      column-gap: 1rem;
+    }
+
+    .masonry-item {
+      break-inside: avoid;
+      margin-bottom: 1rem;
+      position: relative;
+      overflow: hidden;
+      cursor: pointer;
+      display: block;
+    }
+
+    .masonry-item.skriven { display: none; }
+
+    .masonry-slika {
+      width: 100%;
+      display: block;
+      transition: transform 0.5s ease;
+    }
+
+    .masonry-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to top, rgba(26,26,26,0.85) 0%, rgba(26,26,26,0.2) 50%, transparent 100%);
+      opacity: 0;
+      transition: opacity 0.4s ease;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      padding: 1.5rem;
+    }
+
+    .masonry-item:hover .masonry-overlay { opacity: 1; }
+    .masonry-item:hover .masonry-slika { transform: scale(1.04); }
+
+    .masonry-oznaka {
+      font-size: 0.6rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--zlato);
+      font-weight: 600;
+      margin-bottom: 0.4rem;
+    }
+
+    .masonry-naziv {
+      font-family: var(--font-naslov);
+      font-size: 1rem;
+      color: var(--bijela);
+    }
+
+    .masonry-zoom {
+      position: absolute;
+      top: 1rem;
+      right: 1rem;
+      width: 36px;
+      height: 36px;
+      background: rgba(212,175,55,0.9);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      transition: opacity 0.4s;
+    }
+
+    .masonry-item:hover .masonry-zoom { opacity: 1; }
+
+    /* Placeholder slike razlicite visine */
+    .masonry-slika-placeholder {
+      width: 100%;
+      background: linear-gradient(135deg, #e8e4dc 0%, #d4cfc7 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+
+    .masonry-slika-placeholder svg {
+      fill: rgba(26,26,26,0.2);
+    }
+
+    .masonry-slika-placeholder p {
+      font-size: 0.6rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: rgba(26,26,26,0.3);
+    }
+
+    /* Visine za masonry efekt */
+    .vis-s { height: 200px; }
+    .vis-m { height: 280px; }
+    .vis-l { height: 360px; }
+    .vis-xl { height: 420px; }
+
+    /* ===== LIGHTBOX ===== */
+    .lightbox {
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.95);
+      z-index: 2000;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity 0.4s ease, visibility 0.4s ease;
+    }
+
+    .lightbox.otvoren { opacity: 1; visibility: visible; }
+
+    .lightbox-sadrzaj {
+      position: relative;
+      max-width: 900px;
+      width: 90%;
+      transform: scale(0.9);
+      transition: transform 0.4s ease;
+    }
+
+    .lightbox.otvoren .lightbox-sadrzaj { transform: scale(1); }
+
+    .lightbox-slika {
+      width: 100%;
+      display: block;
+    }
+
+    .lightbox-info {
+      background: var(--crna);
+      padding: 1.5rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .lightbox-naslov {
+      font-family: var(--font-naslov);
+      font-size: 1.1rem;
+      color: var(--bijela);
+    }
+
+    .lightbox-kategorija {
+      font-size: 0.65rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--zlato);
+      display: block;
+      margin-bottom: 0.25rem;
+    }
+
+    .lightbox-zatvori {
+      position: absolute;
+      top: -3rem;
+      right: 0;
+      background: none;
+      border: none;
+      color: rgba(255,255,255,0.6);
+      font-size: 1.5rem;
+      cursor: pointer;
+      padding: 0.5rem;
+      transition: color 0.3s;
+      font-family: var(--font-tijelo);
+    }
+
+    .lightbox-zatvori:hover { color: var(--zlato); }
+
+    .lightbox-nav {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      background: rgba(26,26,26,0.7);
+      border: 1px solid rgba(255,255,255,0.1);
+      color: rgba(255,255,255,0.7);
+      width: 46px;
+      height: 46px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: var(--prijelaz);
+      font-size: 1.2rem;
+    }
+
+    .lightbox-nav:hover { background: var(--zlato); color: var(--crna); border-color: var(--zlato); }
+    .lightbox-nav-lijevo { left: -5rem; }
+    .lightbox-nav-desno { right: -5rem; }
+
+    .lightbox-brojac {
+      font-size: 0.7rem;
+      letter-spacing: 0.1em;
+      color: rgba(255,255,255,0.4);
+    }
+
+    /* ===== BEFORE/AFTER SEKCIJA ===== */
+    .ba-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 2rem;
+      margin-top: 4rem;
+    }
+
+    .ba-kartica {
+      overflow: hidden;
+      position: relative;
+    }
+
+    .ba-slike {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2px;
+      background: var(--crna);
+    }
+
+    .ba-slika {
+      position: relative;
+    }
+
+    .ba-slika-oznaka {
+      position: absolute;
+      top: 0.75rem;
+      left: 0.75rem;
+      background: var(--crna);
+      color: var(--bijela);
+      font-size: 0.55rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      padding: 0.3rem 0.6rem;
+      font-weight: 600;
+    }
+
+    .ba-slika-placeholder {
+      width: 100%;
+      height: 220px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+
+    .ba-slika:first-child .ba-slika-placeholder {
+      background: linear-gradient(135deg, #c8c4bc 0%, #b8b4ac 100%);
+    }
+
+    .ba-slika:last-child .ba-slika-placeholder {
+      background: linear-gradient(135deg, #e8e4dc 0%, #d8d4cc 100%);
+    }
+
+    .ba-slika-placeholder svg { fill: rgba(26,26,26,0.2); width: 30px; height: 30px; }
+    .ba-slika-placeholder p { font-size: 0.6rem; letter-spacing: 0.1em; text-transform: uppercase; color: rgba(26,26,26,0.3); }
+
+    .ba-info {
+      padding: 1.25rem 1.5rem;
+      background: var(--siva-svijetla);
+      border-top: 2px solid var(--zlato);
+    }
+
+    .ba-info h4 {
+      font-family: var(--font-naslov);
+      font-size: 1rem;
+      margin-bottom: 0.3rem;
+    }
+
+    .ba-info span {
+      font-size: 0.72rem;
+      color: var(--siva-tekst);
+    }
+
+    /* ===== RESPONSIVE ===== */
+    @media (max-width: 900px) {
+      .masonry { columns: 2; }
+      .lightbox-nav-lijevo { left: -3rem; }
+      .lightbox-nav-desno { right: -3rem; }
+    }
+
+    @media (max-width: 600px) {
+      .masonry { columns: 1; }
+      .ba-grid { grid-template-columns: 1fr; }
+      .lightbox-nav { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAVIGACIJA -->
+  <nav class="nav tamna">
+    <a href="index.html" class="nav-logo">Lumiere<span>Studio</span></a>
+    <ul class="nav-links">
+      <li><a href="index.html">Početna</a></li>
+      <li><a href="usluge.html">Usluge</a></li>
+      <li><a href="galerija.html">Galerija</a></li>
+      <li><a href="kontakt.html">Kontakt</a></li>
+      <li><a href="kontakt.html" class="gumb gumb-primarni">Rezerviraj</a></li>
+    </ul>
+    <button class="nav-hamburger" aria-label="Izbornik">
+      <span></span><span></span><span></span>
+    </button>
+  </nav>
+
+  <!-- HERO -->
+  <div class="stranica-hero">
+    <p class="podnaslov-sekcija">Naši radovi</p>
+    <h1>Galerija <em>radova</em></h1>
+    <div class="linija-zlato" style="display:block;margin:1.5rem auto;"></div>
+    <p>Svaki rezultat je vrjedan pažnje. Pregledajte naše radove i uvjerite se u kvalitetu i preciznost naše ekipe.</p>
+  </div>
+
+  <!-- GALERIJA -->
+  <section class="sekcija">
+    <div class="kontejner">
+
+      <div class="galerija-filter animiraj">
+        <button class="filter-gumb aktivan" data-kat="sve">Sve</button>
+        <button class="filter-gumb" data-kat="frizura">Frizure</button>
+        <button class="filter-gumb" data-kat="bojanje">Bojanje</button>
+        <button class="filter-gumb" data-kat="nokti">Nokti</button>
+        <button class="filter-gumb" data-kat="styling">Styling</button>
+      </div>
+
+      <div class="masonry animiraj" id="masonry">
+
+        <div class="masonry-item" data-kat="bojanje" data-id="0" data-naziv="Balayage tretman" data-kategorija="Bojanje">
+          <img src="https://images.unsplash.com/photo-1574015974293-817f0ebebb74?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8M3x8aGFpcnxlbnwwfHwwfHx8MA%3D%3D" alt="Balayage tretman" style="width:100%;height:200px;display:block;object-fit:cover;" class="masonry-slika" />          <div class="masonry-overlay">
+            <div class="masonry-oznaka">Bojanje</div>
+            <div class="masonry-naziv">Balayage tretman</div>
+          </div>
+          <div class="masonry-zoom">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="var(--crna)"><path d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14zm2.5-4h-2v2H9v-2H7V9h2V7h1v2h2v1z"/></svg>
+          </div>
+        </div>
+
+        <div class="masonry-item" data-kat="frizura" data-id="1" data-naziv="Bob frizura" data-kategorija="Frizure">
+          <img src="https://images.unsplash.com/photo-1554519934-e32b1629d9ee?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTB8fGhhaXJ8ZW58MHx8MHx8fDA%3D" alt="Bob frizura" style="width:100%;height:280px;display:block;object-fit:cover;" class="masonry-slika" />
+          <div class="masonry-overlay">
+            <div class="masonry-oznaka">Frizure</div>
+            <div class="masonry-naziv">Bob frizura</div>
+          </div>
+          <div class="masonry-zoom">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="var(--crna)"><path d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14zm2.5-4h-2v2H9v-2H7V9h2V7h1v2h2v1z"/></svg>
+          </div>
+        </div>
+
+        <div class="masonry-item" data-kat="nokti" data-id="2" data-naziv="Gel manikura" data-kategorija="Nokti">
+          <img src="https://images.unsplash.com/photo-1614020863825-28a0bb7e3c3c?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTJ8fGhhaXJ8ZW58MHx8MHx8fDA%3D" alt="Gel manikura" style="width:100%;height:220px;display:block;object-fit:cover;" class="masonry-slika" />
+          <div class="masonry-overlay">
+            <div class="masonry-oznaka">Nokti</div>
+            <div class="masonry-naziv">Gel manikura</div>
+          </div>
+          <div class="masonry-zoom">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="var(--crna)"><path d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14zm2.5-4h-2v2H9v-2H7V9h2V7h1v2h2v1z"/></svg>
+          </div>
+        </div>
+
+        <div class="masonry-item" data-kat="styling" data-id="3" data-naziv="Svečani styling" data-kategorija="Styling">
+          <img src="https://images.unsplash.com/photo-1574621100236-d25b64cfd647?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTR8fGhhaXJ8ZW58MHx8MHx8fDA%3D" alt="Svečani styling" style="width:100%;height:340px;display:block;object-fit:cover;" class="masonry-slika" />
+          <div class="masonry-overlay">
+            <div class="masonry-oznaka">Styling</div>
+            <div class="masonry-naziv">Svecani styling</div>
+          </div>
+          <div class="masonry-zoom">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="var(--crna)"><path d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14zm2.5-4h-2v2H9v-2H7V9h2V7h1v2h2v1z"/></svg>
+          </div>
+        </div>
+
+        <div class="masonry-item" data-kat="bojanje" data-id="4" data-naziv="Ombre efekt" data-kategorija="Bojanje">
+          <img src="https://images.unsplash.com/photo-1734111719430-fe4a3973f8af?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTl8fGhhaXJ8ZW58MHx8MHx8fDA%3D" alt="Ombre efekt" style="width:100%;height:260px;display:block;object-fit:cover;" class="masonry-slika" />
+          <div class="masonry-overlay">
+            <div class="masonry-oznaka">Bojanje</div>
+            <div class="masonry-naziv">Ombre efekt</div>
+          </div>
+          <div class="masonry-zoom">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="var(--crna)"><path d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14zm2.5-4h-2v2H9v-2H7V9h2V7h1v2h2v1z"/></svg>
+          </div>
+        </div>
+
+
+      </div>
+
+      
+    </div>
+  </section>
+
+  <!-- LIGHTBOX -->
+  <div class="lightbox" id="lightbox" role="dialog" aria-modal="true">
+    <div class="lightbox-sadrzaj">
+      <button class="lightbox-zatvori" id="lightboxZatvori" aria-label="Zatvori">&#215; Zatvori</button>
+      <div style="background:linear-gradient(135deg,#e8e4dc,#d4cfc7);width:100%;height:450px;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:1rem;">
+        <svg width="50" height="50" viewBox="0 0 24 24" fill="rgba(26,26,26,0.2)"><path d="M21 19V5c0-1.1-.9-2-2-2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2zM8.5 13.5l2.5 3.01L14.5 12l4.5 6H5l3.5-4.5z"/></svg>
+        <p id="lightboxNazivSlika" style="font-size:0.65rem;letter-spacing:0.2em;text-transform:uppercase;color:rgba(26,26,26,0.35);">Vaša fotografija</p>
+      </div>
+      <div class="lightbox-info">
+        <div>
+          <span class="lightbox-kategorija" id="lightboxKategorija">Kategorija</span>
+          <div class="lightbox-naslov" id="lightboxNaslov">Naziv rada</div>
+        </div>
+        <span class="lightbox-brojac" id="lightboxBrojac">1 / 9</span>
+      </div>
+      <button class="lightbox-nav lightbox-nav-lijevo" id="lightboxPrethodna" aria-label="Prethodni">&#8592;</button>
+      <button class="lightbox-nav lightbox-nav-desno" id="lightboxSljedeca" aria-label="Sljedeci">&#8594;</button>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="footer-grid">
+      <div>
+        <div class="footer-logo">Lumiere<span>Studio</span></div>
+        <p>Premium frizerski i beauty salon u srcu grada. Posvećeni vašoj ljepoti od 2012. godine.</p>
+      </div>
+      <div>
+        <h4>Brze veze</h4>
+        <ul class="footer-links">
+          <li><a href="index.html">Početna</a></li>
+          <li><a href="usluge.html">Usluge i cijene</a></li>
+          <li><a href="galerija.html">Galerija</a></li>
+          <li><a href="kontakt.html">Rezervacija</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Kontakt</h4>
+        <ul class="footer-links">
+          <li><a href="tel:+38512345678">+385 1 234 5678</a></li>
+          <li><a href="mailto:info@lumierestudio.hr">info@lumierestudio.hr</a></li>
+          <li>Ilica 42, Zagreb</li>
+          <li>Pon - Sub: 9:00 - 20:00</li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-dno">
+      <span>2024 Lumiere Studio. Sva prava pridržana.</span>
+      <span>Dizajnirano s ljubavlju u Zagrebu</span>
+    </div>
+  </footer>
+
+  <div class="plutajuci-gumbi">
+    <a href="https://wa.me/38512345678" class="plutajuci-gumb plutajuci-gumb-whatsapp" target="_blank" rel="noopener" aria-label="WhatsApp">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+    </a>
+    <a href="tel:+38512345678" class="plutajuci-gumb plutajuci-gumb-poziv" aria-label="Pozovi">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="var(--crna)"><path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/></svg>
+    </a>
+  </div>
+
+  <button class="natrag-gore" aria-label="Natrag na vrh">&#8593;</button>
+
+  <script src="script.js"></script>
+  <script>
+    // ===== GALERIJA FILTER =====
+    (function () {
+      const gumbi = document.querySelectorAll('.filter-gumb');
+      const stavke = document.querySelectorAll('.masonry-item');
+
+      gumbi.forEach(g => {
+        g.addEventListener('click', () => {
+          const kat = g.dataset.kat;
+          gumbi.forEach(b => b.classList.remove('aktivan'));
+          g.classList.add('aktivan');
+
+          stavke.forEach(s => {
+            if (kat === 'sve' || s.dataset.kat === kat) {
+              s.classList.remove('skriven');
+            } else {
+              s.classList.add('skriven');
+            }
+          });
+        });
+      });
+    })();
+
+    // ===== LIGHTBOX =====
+    (function () {
+      const stavke = Array.from(document.querySelectorAll('.masonry-item'));
+      const lightbox = document.getElementById('lightbox');
+      const naslov = document.getElementById('lightboxNaslov');
+      const kategorija = document.getElementById('lightboxKategorija');
+      const nazivSlika = document.getElementById('lightboxNazivSlika');
+      const brojac = document.getElementById('lightboxBrojac');
+      let trenutni = 0;
+      let vidljivi = [];
+
+      function otvori(index) {
+        vidljivi = stavke.filter(s => !s.classList.contains('skriven'));
+        trenutni = index;
+        osvjezi();
+        lightbox.classList.add('otvoren');
+        document.body.style.overflow = 'hidden';
+      }
+
+      function osvjezi() {
+        const s = vidljivi[trenutni];
+        if (!s) return;
+        naslov.textContent = s.dataset.naziv;
+        kategorija.textContent = s.dataset.kategorija;
+        nazivSlika.textContent = s.dataset.naziv;
+        brojac.textContent = (trenutni + 1) + ' / ' + vidljivi.length;
+      }
+
+      function zatvori() {
+        lightbox.classList.remove('otvoren');
+        document.body.style.overflow = '';
+      }
+
+      stavke.forEach((s, i) => {
+        s.addEventListener('click', () => {
+          vidljivi = stavke.filter(st => !st.classList.contains('skriven'));
+          const vi = vidljivi.indexOf(s);
+          otvori(vi >= 0 ? vi : 0);
+        });
+      });
+
+      document.getElementById('lightboxZatvori').addEventListener('click', zatvori);
+      document.getElementById('lightboxPrethodna').addEventListener('click', () => { trenutni = (trenutni - 1 + vidljivi.length) % vidljivi.length; osvjezi(); });
+      document.getElementById('lightboxSljedeca').addEventListener('click', () => { trenutni = (trenutni + 1) % vidljivi.length; osvjezi(); });
+
+      lightbox.addEventListener('click', e => { if (e.target === lightbox) zatvori(); });
+
+      document.addEventListener('keydown', e => {
+        if (!lightbox.classList.contains('otvoren')) return;
+        if (e.key === 'Escape') zatvori();
+        if (e.key === 'ArrowLeft') { trenutni = (trenutni - 1 + vidljivi.length) % vidljivi.length; osvjezi(); }
+        if (e.key === 'ArrowRight') { trenutni = (trenutni + 1) % vidljivi.length; osvjezi(); }
+      });
+    })();
+  </script>
+</body>
+</html>

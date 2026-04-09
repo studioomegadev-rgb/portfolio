@@ -1,0 +1,734 @@
+<!DOCTYPE html>
+<html lang="hr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Usluge & Cijene — Lumiere Studio</title>
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    /* ===== PAGE HERO ===== */
+    .stranica-hero {
+      background: var(--crna);
+      padding: 10rem 2rem 5rem;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .stranica-hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(ellipse at 30% 60%, rgba(212,175,55,0.08) 0%, transparent 60%),
+        radial-gradient(ellipse at 70% 30%, rgba(212,175,55,0.05) 0%, transparent 50%);
+    }
+
+    .stranica-hero > * { position: relative; z-index: 1; }
+
+    .stranica-hero h1 {
+      font-family: var(--font-naslov);
+      font-size: clamp(2.5rem, 5vw, 4rem);
+      color: var(--bijela);
+      margin-bottom: 1rem;
+    }
+
+    .stranica-hero h1 em { color: var(--zlato); font-style: italic; }
+
+    .stranica-hero p {
+      color: rgba(255,255,255,0.55);
+      max-width: 520px;
+      margin: 0 auto;
+      font-size: 0.9rem;
+      line-height: 1.8;
+    }
+
+    /* ===== FILTER TABOVI ===== */
+    .filter-bar {
+      display: flex;
+      justify-content: center;
+      gap: 0;
+      border-bottom: 1px solid var(--siva-srednja);
+      margin-bottom: 4rem;
+      overflow-x: auto;
+    }
+
+    .filter-tab {
+      padding: 1.1rem 2rem;
+      font-size: 0.72rem;
+      font-weight: 600;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--siva-tekst);
+      cursor: pointer;
+      border: none;
+      background: none;
+      border-bottom: 2px solid transparent;
+      margin-bottom: -1px;
+      transition: var(--prijelaz);
+      white-space: nowrap;
+      font-family: var(--font-tijelo);
+    }
+
+    .filter-tab:hover { color: var(--crna); }
+    .filter-tab.aktivan { color: var(--zlato); border-bottom-color: var(--zlato); }
+
+    /* ===== KATEGORIJA ===== */
+    .kategorija { display: none; }
+    .kategorija.vidljiva { display: block; }
+
+    .kategorija-naslov {
+      display: flex;
+      align-items: center;
+      gap: 1.5rem;
+      margin-bottom: 2.5rem;
+    }
+
+    .kategorija-naslov h2 {
+      font-family: var(--font-naslov);
+      font-size: 1.8rem;
+      color: var(--crna);
+    }
+
+    .kategorija-naslov::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: var(--siva-srednja);
+    }
+
+    /* ===== CJENIK KARTICA ===== */
+    .usluge-lista {
+      display: grid;
+      gap: 0;
+      border: 1px solid var(--siva-srednja);
+      margin-bottom: 4rem;
+    }
+
+    .usluga-red {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      align-items: start;
+      gap: 2rem;
+      padding: 1.75rem 2rem;
+      border-bottom: 1px solid var(--siva-srednja);
+      transition: background 0.25s;
+      position: relative;
+    }
+
+    .usluga-red:last-child { border-bottom: none; }
+
+    .usluga-red::before {
+      content: '';
+      position: absolute;
+      left: 0; top: 0; bottom: 0;
+      width: 3px;
+      background: var(--zlato);
+      transform: scaleY(0);
+      transition: transform 0.3s ease;
+    }
+
+    .usluga-red:hover { background: var(--siva-svijetla); }
+    .usluga-red:hover::before { transform: scaleY(1); }
+
+    .usluga-red-naziv {
+      font-family: var(--font-naslov);
+      font-size: 1.05rem;
+      color: var(--crna);
+      margin-bottom: 0.4rem;
+    }
+
+    .usluga-red-opis {
+      font-size: 0.82rem;
+      color: var(--siva-tekst);
+      line-height: 1.7;
+    }
+
+    .usluga-red-trajanje {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+      font-size: 0.7rem;
+      color: rgba(212,175,55,0.8);
+      font-weight: 500;
+      margin-top: 0.5rem;
+      letter-spacing: 0.05em;
+    }
+
+    .usluga-red-cijena {
+      text-align: right;
+      flex-shrink: 0;
+    }
+
+    .cijena-iznos {
+      font-family: var(--font-naslov);
+      font-size: 1.4rem;
+      color: var(--crna);
+      display: block;
+      line-height: 1;
+    }
+
+    .cijena-od {
+      font-size: 0.65rem;
+      color: var(--siva-tekst);
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      display: block;
+      margin-bottom: 2px;
+    }
+
+    .cijena-valuta {
+      font-size: 0.8rem;
+      vertical-align: super;
+    }
+
+    /* ===== POSEBNA PONUDA ===== */
+    .posebna-ponuda {
+      background: var(--crna);
+      padding: 3rem;
+      display: grid;
+      grid-template-columns: 1fr auto;
+      align-items: center;
+      gap: 2rem;
+      margin-bottom: 4rem;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .posebna-ponuda::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, rgba(212,175,55,0.1) 0%, transparent 60%);
+      pointer-events: none;
+    }
+
+    .posebna-ponuda-tag {
+      font-size: 0.65rem;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--zlato);
+      font-weight: 600;
+      margin-bottom: 0.75rem;
+    }
+
+    .posebna-ponuda h3 {
+      font-family: var(--font-naslov);
+      font-size: 1.8rem;
+      color: var(--bijela);
+      margin-bottom: 0.75rem;
+    }
+
+    .posebna-ponuda p {
+      color: rgba(255,255,255,0.55);
+      font-size: 0.85rem;
+      line-height: 1.7;
+    }
+
+    /* ===== PAKETI ===== */
+    .paketi-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 0;
+      border: 1px solid var(--siva-srednja);
+      margin-bottom: 4rem;
+    }
+
+    .paket {
+      padding: 2.5rem 2rem;
+      border-right: 1px solid var(--siva-srednja);
+      position: relative;
+      transition: var(--prijelaz);
+    }
+
+    .paket:last-child { border-right: none; }
+    .paket:hover { background: var(--siva-svijetla); }
+
+    .paket.istaknuti {
+      background: var(--crna);
+      color: var(--bijela);
+    }
+
+    .paket.istaknuti:hover { background: #222; }
+
+    .paket-oznaka {
+      font-size: 0.6rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      font-weight: 600;
+      margin-bottom: 1rem;
+    }
+
+    .paket:not(.istaknuti) .paket-oznaka { color: var(--siva-tekst); }
+    .paket.istaknuti .paket-oznaka { color: var(--zlato); }
+
+    .paket-naziv {
+      font-family: var(--font-naslov);
+      font-size: 1.5rem;
+      margin-bottom: 0.5rem;
+      color: inherit;
+    }
+
+    .paket-cijena {
+      font-family: var(--font-naslov);
+      font-size: 2.5rem;
+      color: var(--zlato);
+      line-height: 1;
+      margin: 1rem 0;
+    }
+
+    .paket-opis {
+      font-size: 0.82rem;
+      line-height: 1.8;
+      margin-bottom: 1.5rem;
+    }
+
+    .paket:not(.istaknuti) .paket-opis { color: var(--siva-tekst); }
+    .paket.istaknuti .paket-opis { color: rgba(255,255,255,0.55); }
+
+    .paket-lista {
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+      margin-bottom: 2rem;
+    }
+
+    .paket-lista li {
+      font-size: 0.82rem;
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    .paket:not(.istaknuti) .paket-lista li { color: var(--siva-tekst); }
+    .paket.istaknuti .paket-lista li { color: rgba(255,255,255,0.7); }
+
+    .paket-lista li::before {
+      content: '';
+      width: 5px;
+      height: 5px;
+      background: var(--zlato);
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+
+    /* ===== NAPOMENA ===== */
+    .napomena {
+      background: #fff8e7;
+      border-left: 3px solid var(--zlato);
+      padding: 1.25rem 1.5rem;
+      font-size: 0.82rem;
+      color: var(--siva-tekst);
+      margin-bottom: 3rem;
+      line-height: 1.7;
+    }
+
+    /* ===== RESPONSIVE ===== */
+    @media (max-width: 800px) {
+      .paketi-grid { grid-template-columns: 1fr; }
+      .paket { border-right: none; border-bottom: 1px solid var(--siva-srednja); }
+      .posebna-ponuda { grid-template-columns: 1fr; }
+      .usluga-red { grid-template-columns: 1fr; }
+      .usluga-red-cijena { text-align: left; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAVIGACIJA -->
+  <nav class="nav tamna">
+    <a href="index.html" class="nav-logo">Lumiere<span>Studio</span></a>
+    <ul class="nav-links">
+      <li><a href="index.html">Početna</a></li>
+      <li><a href="usluge.html">Usluge</a></li>
+      <li><a href="galerija.html">Galerija</a></li>
+      <li><a href="kontakt.html">Kontakt</a></li>
+      <li><a href="kontakt.html" class="gumb gumb-primarni">Rezerviraj</a></li>
+    </ul>
+    <button class="nav-hamburger" aria-label="Izbornik">
+      <span></span><span></span><span></span>
+    </button>
+  </nav>
+
+  <!-- HERO -->
+  <div class="stranica-hero">
+    <p class="podnaslov-sekcija">Transparentne cijene</p>
+    <h1>Usluge & <em>Cijene</em></h1>
+    <div class="linija-zlato" style="display:block;margin:1.5rem auto;"></div>
+    <p>Sve naše usluge izvode isključivo certificirani stručnjaci koristeći premium materijale. Cijene su konačne, bez skrivenih naknada.</p>
+  </div>
+
+  <!-- GLAVNI SADRZAJ -->
+  <section class="sekcija">
+    <div class="kontejner">
+
+      <!-- FILTER TABOVI -->
+      <div class="filter-bar animiraj">
+        <button class="filter-tab aktivan" data-tab="kosa">Frizura & Kosa</button>
+        <button class="filter-tab" data-tab="bojanje">Bojanje</button>
+        <button class="filter-tab" data-tab="nokti">Nokti</button>
+        <button class="filter-tab" data-tab="tretmani">Tretmani</button>
+        <button class="filter-tab" data-tab="paketi">Paketi</button>
+      </div>
+
+      <!-- KOSA -->
+      <div class="kategorija vidljiva animiraj" id="tab-kosa">
+        <div class="kategorija-naslov">
+          <h2>Frizura & Styling</h2>
+        </div>
+
+        <div class="napomena">
+          Napomena: Konačna cijena može varirati ovisno o duljini i gustoći kose. Točnu procjenu dobit ćete pri dolasku na konzultaciju.
+        </div>
+
+        <div class="usluge-lista">
+          <div class="usluga-red">
+            <div>
+              <div class="usluga-red-naziv">Šišanje — kratka kosa</div>
+              <div class="usluga-red-opis">Pranje, šišanje i styling za kratku kosu. Uključuje konzultaciju i savjet o njezi.</div>
+              <div class="usluga-red-trajanje">30 — 45 min</div>
+            </div>
+            <div class="usluga-red-cijena">
+              <span class="cijena-od">od</span>
+              <span class="cijena-iznos"><span class="cijena-valuta">€</span>25</span>
+            </div>
+          </div>
+          <div class="usluga-red">
+            <div>
+              <div class="usluga-red-naziv">Šišanje — srednja kosa</div>
+              <div class="usluga-red-opis">Pranje, šišanje i blow-dry. Oblikovanje prema obliku lica i personalnom stilu.</div>
+              <div class="usluga-red-trajanje">45 — 60 min</div>
+            </div>
+            <div class="usluga-red-cijena">
+              <span class="cijena-od">od</span>
+              <span class="cijena-iznos"><span class="cijena-valuta">€</span>35</span>
+            </div>
+          </div>
+          <div class="usluga-red">
+            <div>
+              <div class="usluga-red-naziv">Šišanje — duga kosa</div>
+              <div class="usluga-red-opis">Pranje, šišanje, blow-dry i završni styling za dugu kosu. Dubinska njega uključena.</div>
+              <div class="usluga-red-trajanje">60 — 90 min</div>
+            </div>
+            <div class="usluga-red-cijena">
+              <span class="cijena-od">od</span>
+              <span class="cijena-iznos"><span class="cijena-valuta">€</span>50</span>
+            </div>
+          </div>
+          <div class="usluga-red">
+            <div>
+              <div class="usluga-red-naziv">Pranje i sušenje</div>
+              <div class="usluga-red-opis">Profesionalno pranje sa šamponom i regeneratorom prilagodenim tipu kose. Blow-dry styling.</div>
+              <div class="usluga-red-trajanje">30 min</div>
+            </div>
+            <div class="usluga-red-cijena">
+              <span class="cijena-od">od</span>
+              <span class="cijena-iznos"><span class="cijena-valuta">€</span>18</span>
+            </div>
+          </div>
+          <div class="usluga-red">
+            <div>
+              <div class="usluga-red-naziv">Svečana frizura</div>
+              <div class="usluga-red-opis">Pundera, pletenica ili svečani styling za posebne prilike. Dugotrajni lak i hairspray uključeni.</div>
+              <div class="usluga-red-trajanje">60 — 120 min</div>
+            </div>
+            <div class="usluga-red-cijena">
+              <span class="cijena-od">od</span>
+              <span class="cijena-iznos"><span class="cijena-valuta">€</span>65</span>
+            </div>
+          </div>
+          <div class="usluga-red">
+            <div>
+              <div class="usluga-red-naziv">Ravnanje / kvrčanje</div>
+              <div class="usluga-red-opis">Profesionalno ravnanje ili kvrčanje toplinskim alatima uz zaštitni serum za kosu.</div>
+              <div class="usluga-red-trajanje">45 — 75 min</div>
+            </div>
+            <div class="usluga-red-cijena">
+              <span class="cijena-od">od</span>
+              <span class="cijena-iznos"><span class="cijena-valuta">€</span>30</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- BOJANJE -->
+      <div class="kategorija animiraj" id="tab-bojanje">
+        <div class="kategorija-naslov"><h2>Bojanje & Koloristika</h2></div>
+        <div class="napomena">Bojanje uključuje konzultaciju s koloristom, analizu stanja kose i prijedlog najboljeg rješenja za vas. Koristimo boje bez amonijaka.</div>
+        <div class="usluge-lista">
+          <div class="usluga-red">
+            <div>
+              <div class="usluga-red-naziv">Jednobojno bojanje — kratka kosa</div>
+              <div class="usluga-red-opis">Precizno bojanje u jednoj nijansi. Uključuje pranje, tretman i sušenje.</div>
+              <div class="usluga-red-trajanje">60 — 90 min</div>
+            </div>
+            <div class="usluga-red-cijena"><span class="cijena-od">od</span><span class="cijena-iznos"><span class="cijena-valuta">€</span>55</span></div>
+          </div>
+          <div class="usluga-red">
+            <div>
+              <div class="usluga-red-naziv">Jednobojno bojanje — duga kosa</div>
+              <div class="usluga-red-opis">Potpuno bojanje u jednoj nijansi za srednju i dugu kosu. Premium boje bez amonijaka.</div>
+              <div class="usluga-red-trajanje">90 — 120 min</div>
+            </div>
+            <div class="usluga-red-cijena"><span class="cijena-od">od</span><span class="cijena-iznos"><span class="cijena-valuta">€</span>80</span></div>
+          </div>
+          <div class="usluga-red">
+            <div>
+              <div class="usluga-red-naziv">Balayage</div>
+              <div class="usluga-red-opis">Ručno oslikavanje kose za prirodan, suncem osvjetljeni efekt. Dugotrajno i nisko održavanje.</div>
+              <div class="usluga-red-trajanje">150 — 210 min</div>
+            </div>
+            <div class="usluga-red-cijena"><span class="cijena-od">od</span><span class="cijena-iznos"><span class="cijena-valuta">€</span>130</span></div>
+          </div>
+          <div class="usluga-red">
+            <div>
+              <div class="usluga-red-naziv">Ombre & Sombre</div>
+              <div class="usluga-red-opis">Gradijentni prijelaz boje od tamnijih korijena ka svjetlijim vrhovima. Sofisticirani look.</div>
+              <div class="usluga-red-trajanje">120 — 180 min</div>
+            </div>
+            <div class="usluga-red-cijena"><span class="cijena-od">od</span><span class="cijena-iznos"><span class="cijena-valuta">€</span>110</span></div>
+          </div>
+          <div class="usluga-red">
+            <div>
+              <div class="usluga-red-naziv">Highlights / Pramenovi</div>
+              <div class="usluga-red-opis">Parcijalni ili cjeloviti pramenovi za dubinu i dimenziju. Folija ili slobodnom rukom.</div>
+              <div class="usluga-red-trajanje">90 — 150 min</div>
+            </div>
+            <div class="usluga-red-cijena"><span class="cijena-od">od</span><span class="cijena-iznos"><span class="cijena-valuta">€</span>90</span></div>
+          </div>
+          <div class="usluga-red">
+            <div>
+              <div class="usluga-red-naziv">Korekcija boje</div>
+              <div class="usluga-red-opis">Profesionalna korekcija neuspjesnog bojanja ili promjena tona. Procjena na konzultaciji.</div>
+              <div class="usluga-red-trajanje">po dogovoru</div>
+            </div>
+            <div class="usluga-red-cijena"><span class="cijena-od">od</span><span class="cijena-iznos"><span class="cijena-valuta">€</span>150</span></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- NOKTI -->
+      <div class="kategorija animiraj" id="tab-nokti">
+        <div class="kategorija-naslov"><h2>Nokti & Manikura</h2></div>
+        <div class="usluge-lista">
+          <div class="usluga-red">
+            <div>
+              <div class="usluga-red-naziv">Klasicna manikura</div>
+              <div class="usluga-red-opis">Obrada noktiju, kožice i lak po izboru. Njega ruku ukljucena.</div>
+              <div class="usluga-red-trajanje">45 min</div>
+            </div>
+            <div class="usluga-red-cijena"><span class="cijena-od">od</span><span class="cijena-iznos"><span class="cijena-valuta">€</span>22</span></div>
+          </div>
+          <div class="usluga-red">
+            <div>
+              <div class="usluga-red-naziv">Gel manikura</div>
+              <div class="usluga-red-opis">Dugotrajni gel lak koji se suši pod UV lampom. Traje do 3 tjedna bez ljustenja.</div>
+              <div class="usluga-red-trajanje">60 min</div>
+            </div>
+            <div class="usluga-red-cijena"><span class="cijena-od">od</span><span class="cijena-iznos"><span class="cijena-valuta">€</span>35</span></div>
+          </div>
+          <div class="usluga-red">
+            <div>
+              <div class="usluga-red-naziv">Izgradnja noktiju (gel/akril)</div>
+              <div class="usluga-red-opis">Profesionalna izgradnja i oblikovanje noktiju prema zelji klijentica.</div>
+              <div class="usluga-red-trajanje">90 — 120 min</div>
+            </div>
+            <div class="usluga-red-cijena"><span class="cijena-od">od</span><span class="cijena-iznos"><span class="cijena-valuta">€</span>55</span></div>
+          </div>
+          <div class="usluga-red">
+            <div>
+              <div class="usluga-red-naziv">Nail art</div>
+              <div class="usluga-red-opis">Rucno oslikavanje i dekoracija noktiju. Cijena ovisi o slozenom dizajnu.</div>
+              <div class="usluga-red-trajanje">30 — 90 min</div>
+            </div>
+            <div class="usluga-red-cijena"><span class="cijena-od">od</span><span class="cijena-iznos"><span class="cijena-valuta">€</span>15</span></div>
+          </div>
+          <div class="usluga-red">
+            <div>
+              <div class="usluga-red-naziv">Klasicna pedikura</div>
+              <div class="usluga-red-opis">Kupka, obrada noktiju i kožice, uklanjanje mrtve koze i lak. Masaza stopala ukljucena.</div>
+              <div class="usluga-red-trajanje">60 min</div>
+            </div>
+            <div class="usluga-red-cijena"><span class="cijena-od">od</span><span class="cijena-iznos"><span class="cijena-valuta">€</span>35</span></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- TRETMANI -->
+      <div class="kategorija animiraj" id="tab-tretmani">
+        <div class="kategorija-naslov"><h2>Tretmani & Njega</h2></div>
+        <div class="posebna-ponuda">
+          <div>
+            <div class="posebna-ponuda-tag">Bestseller tretman</div>
+            <h3>Keratin tretman</h3>
+            <p>Revolucionarni tretman koji ispunjava i zaglacuje kosu iznutra. Rezultat traje 3 do 5 mjeseci. Eliminira kovrdze i drasticno smanjuje vrijeme sušanja.</p>
+          </div>
+          <div>
+            <a href="kontakt.html" class="gumb gumb-primarni">Rezerviraj</a>
+          </div>
+        </div>
+        <div class="usluge-lista">
+          <div class="usluga-red">
+            <div>
+              <div class="usluga-red-naziv">Keratin tretman — kratka kosa</div>
+              <div class="usluga-red-opis">Isključuje sušenje i ravnanje. Trajnost 3 — 4 mjeseca.</div>
+              <div class="usluga-red-trajanje">120 min</div>
+            </div>
+            <div class="usluga-red-cijena"><span class="cijena-od">od</span><span class="cijena-iznos"><span class="cijena-valuta">€</span>120</span></div>
+          </div>
+          <div class="usluga-red">
+            <div>
+              <div class="usluga-red-naziv">Keratin tretman — duga kosa</div>
+              <div class="usluga-red-opis">Kompletni keratin tretman za srednju i dugu kosu. Trajnost do 5 mjeseci.</div>
+              <div class="usluga-red-trajanje">150 — 180 min</div>
+            </div>
+            <div class="usluga-red-cijena"><span class="cijena-od">od</span><span class="cijena-iznos"><span class="cijena-valuta">€</span>180</span></div>
+          </div>
+          <div class="usluga-red">
+            <div>
+              <div class="usluga-red-naziv">Botoks za kosu</div>
+              <div class="usluga-red-opis">Dubinska regeneracija i obnova strukture kose. Obnavlja ošecene vlasi i vraca sjaj.</div>
+              <div class="usluga-red-trajanje">90 min</div>
+            </div>
+            <div class="usluga-red-cijena"><span class="cijena-od">od</span><span class="cijena-iznos"><span class="cijena-valuta">€</span>95</span></div>
+          </div>
+          <div class="usluga-red">
+            <div>
+              <div class="usluga-red-naziv">Olaplex tretman</div>
+              <div class="usluga-red-opis">Tretman koji popravlja unutarnju strukturu kose i spaja pokidane veze proteina. Idealno uz bojanje.</div>
+              <div class="usluga-red-trajanje">30 — 45 min</div>
+            </div>
+            <div class="usluga-red-cijena"><span class="cijena-od">od</span><span class="cijena-iznos"><span class="cijena-valuta">€</span>40</span></div>
+          </div>
+          <div class="usluga-red">
+            <div>
+              <div class="usluga-red-naziv">Waxing — obrve</div>
+              <div class="usluga-red-opis">Oblikovanje i uredivanje obrva voskom. Fino doradivanje pincetom u završnom koraku.</div>
+              <div class="usluga-red-trajanje">20 min</div>
+            </div>
+            <div class="usluga-red-cijena"><span class="cijena-od">od</span><span class="cijena-iznos"><span class="cijena-valuta">€</span>12</span></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- PAKETI -->
+      <div class="kategorija animiraj" id="tab-paketi">
+        <div class="kategorija-naslov"><h2>Posebni Paketi</h2></div>
+        <div class="paketi-grid">
+          <div class="paket">
+            <div class="paket-oznaka">Paket</div>
+            <div class="paket-naziv">Svjezina</div>
+            <div class="paket-cijena"><span class="cijena-valuta" style="font-size:1.2rem">€</span>65</div>
+            <p class="paket-opis">Idealno za osvjezavanje izgleda. Brzo, ucinkovito i pristupacno.</p>
+            <ul class="paket-lista">
+              <li>Pranje i sušenje kose</li>
+              <li>Šišanje i styling</li>
+              <li>Klasicna manikura</li>
+            </ul>
+            <a href="kontakt.html" class="gumb gumb-tamni" style="width:100%;text-align:center;">Rezerviraj</a>
+          </div>
+
+          <div class="paket istaknuti">
+            <div class="paket-oznaka">Najpopularnije</div>
+            <div class="paket-naziv">Lumiere Ritual</div>
+            <div class="paket-cijena"><span class="cijena-valuta" style="font-size:1.2rem">€</span>140</div>
+            <p class="paket-opis">Kompletno beauty iskustvo za onu koja želi biti savršena od glave do pete.</p>
+            <ul class="paket-lista">
+              <li>Šišanje i styling</li>
+              <li>Bojanje ili pramenovi</li>
+              <li>Olaplex tretman</li>
+              <li>Gel manikura</li>
+              <li>Oblikovanje obrva</li>
+            </ul>
+            <a href="kontakt.html" class="gumb gumb-primarni" style="width:100%;text-align:center;">Rezerviraj</a>
+          </div>
+
+          <div class="paket">
+            <div class="paket-oznaka">Premium</div>
+            <div class="paket-naziv">Vjenčanica</div>
+            <div class="paket-cijena"><span class="cijena-valuta" style="font-size:1.2rem">€</span>220</div>
+            <p class="paket-opis">Sve što vam treba za najljepši dan u vašem životu. Proba uključena.</p>
+            <ul class="paket-lista">
+              <li>Svecana frizura (proba + dan)</li>
+              <li>Šišanje vrhova i njega</li>
+              <li>Keratin ili botoks tretman</li>
+              <li>Gel manikura i pedikura</li>
+              <li>Waxing i uredivanje obrva</li>
+            </ul>
+            <a href="kontakt.html" class="gumb gumb-tamni" style="width:100%;text-align:center;">Rezerviraj</a>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="footer-grid">
+      <div>
+        <div class="footer-logo">Lumiere<span>Studio</span></div>
+        <p>Premium frizerski i beauty salon u srcu grada. Posvećeni vašoj ljepoti od 2012. godine.</p>
+      </div>
+      <div>
+        <h4>Brze veze</h4>
+        <ul class="footer-links">
+          <li><a href="index.html">Početna</a></li>
+          <li><a href="usluge.html">Usluge i cijene</a></li>
+          <li><a href="galerija.html">Galerija</a></li>
+          <li><a href="kontakt.html">Rezervacija</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Kontakt</h4>
+        <ul class="footer-links">
+          <li><a href="tel:+38512345678">+385 1 234 5678</a></li>
+          <li><a href="mailto:info@lumierestudio.hr">info@lumierestudio.hr</a></li>
+          <li>Ilica 42, Zagreb</li>
+          <li>Pon - Sub: 9:00 - 20:00</li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-dno">
+      <span>2024 Lumiere Studio. Sva prava pridržana.</span>
+      <span>Dizajnirano s ljubavlju u Zagrebu</span>
+    </div>
+  </footer>
+
+  <div class="plutajuci-gumbi">
+    <a href="https://wa.me/38512345678" class="plutajuci-gumb plutajuci-gumb-whatsapp" target="_blank" rel="noopener" aria-label="WhatsApp">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+    </a>
+    <a href="tel:+38512345678" class="plutajuci-gumb plutajuci-gumb-poziv" aria-label="Pozovi">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="var(--crna)"><path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/></svg>
+    </a>
+  </div>
+
+  <button class="natrag-gore" aria-label="Natrag na vrh">&#8593;</button>
+
+  <script src="script.js"></script>
+  <script>
+    // Filter tabovi
+    (function () {
+      const tabovi = document.querySelectorAll('.filter-tab');
+      const kategorije = document.querySelectorAll('.kategorija');
+
+      tabovi.forEach(tab => {
+        tab.addEventListener('click', () => {
+          const cilj = tab.dataset.tab;
+          tabovi.forEach(t => t.classList.remove('aktivan'));
+          kategorije.forEach(k => k.classList.remove('vidljiva'));
+          tab.classList.add('aktivan');
+          const el = document.getElementById('tab-' + cilj);
+          if (el) {
+            el.classList.add('vidljiva');
+            // Re-trigger animation
+            el.classList.remove('vidljivo');
+            setTimeout(() => el.classList.add('vidljivo'), 20);
+          }
+        });
+      });
+    })();
+  </script>
+</body>
+</html>

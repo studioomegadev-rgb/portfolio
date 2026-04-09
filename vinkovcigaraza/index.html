@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="hr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Vinkovci Performance Garage &mdash; Početna</title>
+  <meta name="description" content="Vrhunska automehanička radionica u Vinkovcima. Chiptuning, dijagnostika, performansni dijelovi i ispusi po mjeri. Više od 15 godina iskustva." />
+  <link rel="stylesheet" href="style.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="icon" href="icon.ico" />
+
+</head>
+<body>
+
+  <!-- ======================================================
+       NAVIGACIJA
+  ====================================================== -->
+  <input type="checkbox" id="nav-toggle" aria-hidden="true" />
+
+  <nav class="navbar" role="navigation" aria-label="Glavna navigacija">
+    <a href="index.html" class="nav-brand">
+      <span class="brand-main">VPG</span>
+      <span class="brand-sub">Vinkovci Performance Garage</span>
+    </a>
+
+    <ul class="nav-links">
+      <li><a href="index.html" class="active" aria-current="page">Početna</a></li>
+      <li><a href="services.html">Usluge</a></li>
+      <li><a href="gallery.html">Galerija</a></li>
+      <li><a href="contact.html">Kontakt</a></li>
+    </ul>
+
+    <a href="contact.html" class="nav-cta">Rezerviraj Termin</a>
+
+    <label for="nav-toggle" class="nav-hamburger" aria-label="Otvori izbornik">
+      <span></span>
+      <span></span>
+      <span></span>
+    </label>
+  </nav>
+
+  <!-- Mobile drawer — kontroliran checkboxom -->
+  <div class="nav-drawer" role="dialog" aria-label="Mobilni izbornik">
+    <a href="index.html" class="active">Početna</a>
+    <a href="services.html">Usluge</a>
+    <a href="gallery.html">Galerija</a>
+    <a href="contact.html">Kontakt</a>
+    <a href="contact.html" class="drawer-cta">Rezerviraj Termin</a>
+  </div>
+
+  <main>
+
+    <!-- ======================================================
+         HERO
+    ====================================================== -->
+    <section class="hero" aria-label="Uvodni odjeljak">
+      <div class="hero-bg" role="img" aria-label="Tamna atmosfera garaže"></div>
+      <div class="hero-overlay"></div>
+
+      <div class="hero-content">
+        <p class="hero-eyebrow">Osnovano 2009. &mdash; Vinkovci, Hrvatska</p>
+        <h1 class="hero-title">
+          Napravljeno
+          <em>Za</em>
+          Asfalt.
+        </h1>
+        <p class="hero-desc">
+          Precizno podešavanje, stručna dijagnostika i nadogradnje performansi
+          za vozače koji od svakog kilometra očekuju više.
+        </p>
+        <div class="hero-actions">
+          <a href="services.html" class="btn-primary">Pogledaj Usluge &#8594;</a>
+          <a href="gallery.html" class="btn-outline">Naši Radovi</a>
+        </div>
+      </div>
+
+      <div class="hero-stats">
+        <div class="stat-item">
+          <div class="stat-num">15+</div>
+          <div class="stat-label">Godina Iskustva</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-num">1.200+</div>
+          <div class="stat-label">Servisiranih Vozila</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-num">4</div>
+          <div class="stat-label">Specijalistička Mjesta</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ======================================================
+         O NAMA
+    ====================================================== -->
+    <section class="section" aria-labelledby="about-heading">
+      <div class="about-grid">
+        <div class="about-image-wrap">
+          <img
+            src="https://images.unsplash.com/photo-1486262715619-67b85e0b08d3?w=800&q=80"
+            alt="Mehaničari rade na motoru visokih performansi"
+            loading="lazy"
+          />
+          <div class="about-image-badge">
+            <strong>15+</strong>
+            Godina
+            Stručnosti
+          </div>
+        </div>
+
+        <div class="about-text">
+          <p class="section-label">O Nama</p>
+          <h2 class="section-title" id="about-heading">
+            Rođeni u<br/><span class="accent">Garaži.</span><br/>Građeni za Brzinu.
+          </h2>
+          <p class="section-body">
+            Od 2009. godine, Vinkovci Performance Garage je odredište za ozbiljne
+            entuzijaste diljem Slavonije. Od podešavanja svakodnevnih vozila do
+            potpunih trkaćkih priprema, naš tim certificiranih tehničara donosi
+            nepopustljivu preciznost na svaki posao.
+          </p>
+          <p class="section-body" style="margin-top:1rem;">
+            Kombiniramo dijagnostiku na razini tvornice s performansnom stručnošću
+            koju nećete pronaći ni u jednom ovlaštenom servisu &mdash; jer strast
+            nije stavka na tehničkoj specifikaciji.
+          </p>
+
+          <div class="about-features">
+            <div class="about-feature">Ovlašteni prodavaci vodećih brendova performansnih dijelova</div>
+            <div class="about-feature">OBD-II i vlastnički ECU remapping u radionici</div>
+            <div class="about-feature">Izrada ispusnih sustava po mjeri na licu mjesta</div>
+            <div class="about-feature">Podrška za trkaće pripreme i dane na stazi</div>
+          </div>
+
+          <div style="margin-top:2.5rem; display:flex; gap:1rem; flex-wrap:wrap;">
+            <a href="services.html" class="btn-primary">Naše Usluge &#8594;</a>
+            <a href="contact.html" class="btn-outline">Kontaktiraj Nas</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <div class="divider"></div>
+
+    <!-- ======================================================
+         NEDAVNI PROJEKTI
+    ====================================================== -->
+    <section class="section" aria-labelledby="projects-heading">
+      <div style="display:flex; justify-content:space-between; align-items:flex-end; margin-bottom:2.5rem; flex-wrap:wrap; gap:1.5rem;">
+        <div>
+          <p class="section-label">Nedavni Radovi</p>
+          <h2 class="section-title" id="projects-heading">
+            Svježe S<br/><span class="accent">Dizalice.</span>
+          </h2>
+        </div>
+        <a href="gallery.html" class="btn-outline">Cijela Galerija &#8594;</a>
+      </div>
+
+      <div class="projects-grid">
+
+        <article class="project-card">
+          <span class="project-number">01</span>
+          <img
+            src="https://images.unsplash.com/photo-1611859266238-4b98091d9d9b?w=600&q=80"
+            alt="BMW M3 E46 performance nadogradnja"
+            loading="lazy"
+          />
+          <div class="project-card-info">
+            <div class="project-card-tag">Chiptuning Motora</div>
+            <div class="project-card-title">GT-001-DS</div>
+          </div>
+        </article>
+
+        <article class="project-card">
+          <span class="project-number">02</span>
+          <img
+            src="https://images.unsplash.com/photo-1492144534655-ae79c964c9d7?q=80&w=1583&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+            alt="Volkswagen Golf GTI ispusni sustav po mjeri"
+            loading="lazy"
+          />
+          <div class="project-card-info">
+            <div class="project-card-tag">Auspuh po Mjeri</div>
+            <div class="project-card-title"> 2024 Chevrolet Camaro</div>
+          </div>
+        </article>
+
+        <article class="project-card">
+          <span class="project-number">03</span>
+          <img
+            src="https://images.unsplash.com/photo-1606152421802-db97b9c7a11b?w=600&q=80"
+            alt="Subaru WRX STI faza 2 nadogradnja"
+            loading="lazy"
+          />
+          <div class="project-card-info">
+            <div class="project-card-tag">Faza 2 Nadogradnja</div>
+            <div class="project-card-title">Audi RS 7</div>
+          </div>
+        </article>
+
+      </div>
+
+      <div class="projects-cta">
+        <a href="gallery.html" class="btn-primary" style="margin-top:1rem;">Pogledaj Sve Projekte &#8594;</a>
+      </div>
+    </section>
+
+    <!-- ======================================================
+         CTA TRAKA
+    ====================================================== -->
+    <div style="background:var(--accent); padding:3rem 2rem; text-align:center;">
+      <p style="font-family:var(--font-cond); font-size:0.72rem; letter-spacing:0.3em; text-transform:uppercase; color:rgba(0,0,0,0.6); margin-bottom:0.75rem;">Spreman za Nadogradnju?</p>
+      <h2 style="font-family:var(--font-head); font-size:clamp(2rem,5vw,3.5rem); font-weight:700; text-transform:uppercase; color:#000; letter-spacing:0.02em; margin-bottom:1.5rem;">
+        Izgradimo Nešto Brzo Zajedno.
+      </h2>
+      <a href="contact.html" style="display:inline-flex; align-items:center; gap:0.6rem; font-family:var(--font-cond); font-size:0.8rem; font-weight:700; letter-spacing:0.2em; text-transform:uppercase; padding:0.85rem 2rem; background:#000; color:#fff; transition:opacity 0.2s;">
+        Kontaktiraj Nas Danas &#8594;
+      </a>
+    </div>
+
+  </main>
+
+  <!-- ======================================================
+       PODNOZJE
+  ====================================================== -->
+  <footer class="site-footer" role="contentinfo">
+    <div class="footer-grid">
+
+      <div class="footer-brand">
+        <div class="brand-main">Vinkovci Performance Garage</div>
+        <div class="brand-sub">Građeno Drugačije</div>
+        <p>Vrhunska automehaničarska radionica koja služi Slavoniju i širu okolicu od 2009. Ne popravljamo samo aute &mdash; mi ih transformiramo.</p>
+      </div>
+
+      <div class="footer-col">
+        <h4>Navigacija</h4>
+        <ul>
+          <li><a href="index.html">Početna</a></li>
+          <li><a href="services.html">Usluge</a></li>
+          <li><a href="gallery.html">Galerija</a></li>
+          <li><a href="contact.html">Kontakt</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <h4>Pronađi Nas</h4>
+        <address>
+          Ulica Stjepana Radića 12<br/>
+          32100 Vinkovci<br/>
+          Hrvatska<br/>
+          <br/>
+          <a href="tel:+38532000000" style="color:var(--accent);">+385 32 000 000</a>
+        </address>
+      </div>
+
+    </div>
+
+    
+      <span class="footer-copy">&copy; 2024. Vinkovci Performance Garage. Sva prava pridržana.</span>
+      <span class="footer-credit">Izrađeno s <span>&#9632;</span> preciznošću.</span>
+    </div>
+  </footer>
+
+</body>
+</html>

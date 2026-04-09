@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="hr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Usluge &mdash; Vinkovci Performance Garage</title>
+  <meta name="description" content="Chiptuning motora, dijagnostika, performansni dijelovi i ispusi po mjeri. Profesionalne auto usluge u Vinkovcima." />
+  <link rel="stylesheet" href="style.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="icon" href="icon.ico" />
+
+</head>
+<body>
+
+  <!-- ======================================================
+       NAVIGACIJA
+  ====================================================== -->
+  <input type="checkbox" id="nav-toggle" aria-hidden="true" />
+
+  <nav class="navbar" role="navigation" aria-label="Glavna navigacija">
+    <a href="index.html" class="nav-brand">
+      <span class="brand-main">VPG</span>
+      <span class="brand-sub">Vinkovci Performance Garage</span>
+    </a>
+
+    <ul class="nav-links">
+      <li><a href="index.html">Početna</a></li>
+      <li><a href="services.html" class="active" aria-current="page">Usluge</a></li>
+      <li><a href="gallery.html">Galerija</a></li>
+      <li><a href="contact.html">Kontakt</a></li>
+    </ul>
+
+    <a href="contact.html" class="nav-cta">Rezerviraj Termin</a>
+
+    <label for="nav-toggle" class="nav-hamburger" aria-label="Otvori izbornik">
+      <span></span>
+      <span></span>
+      <span></span>
+    </label>
+  </nav>
+
+  <!-- Mobile drawer -->
+  <div class="nav-drawer" role="dialog" aria-label="Mobilni izbornik">
+    <a href="index.html">Početna</a>
+    <a href="services.html" class="active">Usluge</a>
+    <a href="gallery.html">Galerija</a>
+    <a href="contact.html">Kontakt</a>
+    <a href="contact.html" class="drawer-cta">Rezerviraj Termin</a>
+  </div>
+
+  <main>
+
+    <!-- ======================================================
+         ZAGLAVLJE STRANICE
+    ====================================================== -->
+    <div class="page-hero">
+      <div class="page-hero-inner">
+        <div>
+          <p class="section-label">Što Radimo</p>
+          <h1 class="page-hero-title">
+            Naše<br/><span class="accent">Usluge</span>
+          </h1>
+        </div>
+        <p class="page-hero-desc">
+          Četiri ključne discipline. Neograničene mogućnosti. Svaki posao obavlja
+          certificirani tehničar s istinskom strašću prema performansnom inženjeringu.
+        </p>
+      </div>
+    </div>
+
+    <!-- ======================================================
+         MREZA USLUGA
+    ====================================================== -->
+    <section class="section" aria-labelledby="services-heading">
+      <h2 class="sr-only" id="services-heading">Sve Usluge</h2>
+
+      <div class="services-grid">
+
+        <!-- USLUGA 01 — Chiptuning Motora -->
+        <article class="service-card">
+          <span class="service-bg-num">01</span>
+
+          <div class="service-icon" aria-hidden="true">+</div>
+          <div class="service-card-tag">Usluga 01</div>
+          <h2 class="service-card-title">Chiptuning Motora</h2>
+
+          <div class="service-price">
+            Od <strong>350 &euro;</strong> &mdash; ovisi o vozilu i fazi
+          </div>
+
+          <p class="service-card-desc">
+            Otkrijte pravi potencijal skriven unutar tvorničkog postavljenog ECU-a.
+            Naše prilagođene sjednice remappinga testiraju se na dinamometru i
+            prilagođene su točno vašoj vrsti goriva, modifikacijama i stilu voznje
+            &mdash; ne koristimo generičke karte s polica.
+          </p>
+
+          <ul class="service-includes" aria-label="Što je uključeno">
+            <li>Dijagnostika i procjena vozila prije tuninga</li>
+            <li>Bazno mjerenje na dinamometru (grafovi prije i poslije)</li>
+            <li>Prilagođeni ECU remap ili piggyback tuning</li>
+            <li>Kalibracija omjera zrak/gorivo i vremena paljenja</li>
+            <li>Dostupni paketi Faza 1 / Faza 2 / Faza 3</li>
+            <li>Besplatna revizija unutar 30 dana uključena</li>
+          </ul>
+
+          <div style="margin-top:2rem;">
+            <a href="contact.html" class="btn-primary">Rezerviraj Uslugu &#8594;</a>
+          </div>
+        </article>
+
+        <!-- USLUGA 02 — Dijagnostika -->
+        <article class="service-card">
+          <span class="service-bg-num">02</span>
+
+          <div class="service-icon" aria-hidden="true">D</div>
+          <div class="service-card-tag">Usluga 02</div>
+          <h2 class="service-card-title">Dijagnostika</h2>
+
+          <div class="service-price">
+            Od <strong>60 &euro;</strong> &mdash; puno skeniranje od 120 &euro;
+          </div>
+
+          <p class="service-card-desc">
+            Nema nagađanja. Koristimo dijagnostičku opremu na razini tvornice
+            za više brendova uz praćenje senzora uživo kako bismo lokalizirali
+            kvarove s kirurškom točnošću &mdash; što vam štedi vrijeme, novac i
+            frustraciju.
+          </p>
+
+          <ul class="service-includes" aria-label="Što je uključeno">
+            <li>Potpuno čitanje grešaka OBD-II i CAN bus sustavom</li>
+            <li>Praćenje podataka uživo i zapisivanje senzora</li>
+            <li>Moduli motora, menjača, ABS-a i airbaga</li>
+            <li>Ispisano dijagnostičko izvješće</li>
+            <li>Inspekcija vozila pred kupnju</li>
+            <li>Politika bez popravka &mdash; bez dodatne naplate</li>
+          </ul>
+
+          <div style="margin-top:2rem;">
+            <a href="contact.html" class="btn-primary">Rezerviraj Uslugu &#8594;</a>
+          </div>
+        </article>
+
+        <!-- USLUGA 03 — Performansni Dijelovi -->
+        <article class="service-card">
+          <span class="service-bg-num">03</span>
+
+          <div class="service-icon" aria-hidden="true">P</div>
+          <div class="service-card-tag">Usluga 03</div>
+          <h2 class="service-card-title">Performansni Dijelovi</h2>
+
+          <div class="service-price">
+            Dijelovi od <strong>80 &euro;</strong> &mdash; ugradnja po ponudi
+          </div>
+
+          <p class="service-card-desc">
+            Ovlašteni smo distributeri vrhunskih performansnih brendova. Nabavljamo,
+            savjetujemo i uggradjujemo &mdash; od hladnih usisnih sustava do velikih
+            kočionih kompleta &mdash; uz zajamčenu kompatibilnost prije nego što
+            se odvije i jedan vijak.
+          </p>
+
+          <ul class="service-includes" aria-label="Što je uključeno">
+            <li>Usisni i indukcijski kompleti</li>
+            <li>Interkuleri i cjevovodi za nabijeni zrak</li>
+            <li>Ovjes &mdash; coiloveri, opruge, ležajevi</li>
+            <li>Veliki kočioni kompleti i nadogradnje kočnica</li>
+            <li>Zamjena kvačila i zamajca</li>
+            <li>Nadogradnje turbina i prateće modifikacije</li>
+          </ul>
+
+          <div style="margin-top:2rem;">
+            <a href="contact.html" class="btn-primary">Zatrazi Ponudu &#8594;</a>
+          </div>
+        </article>
+
+        <!-- USLUGA 04 — Ispusi po Mjeri -->
+        <article class="service-card">
+          <span class="service-bg-num">04</span>
+
+          <div class="service-icon" aria-hidden="true">I</div>
+          <div class="service-card-tag">Usluga 04</div>
+          <h2 class="service-card-title">Ispusi po Mjeri</h2>
+
+          <div class="service-price">
+            Puni sustavi od <strong>400 &euro;</strong> &mdash; cat-back od 250 &euro;
+          </div>
+
+          <p class="service-card-desc">
+            Svaki ispus koji izgradimo ručno je izrađivan u našoj radionici.
+            Savijanje nehrđajućeg čelika mandrelom, precizno TIG zavarivanje i
+            točno zvučni profil koji želite &mdash; od tihe svakodnevnice do
+            trkaće grmljavine.
+          </p>
+
+          <ul class="service-includes" aria-label="Što je uključeno">
+            <li>Potpuna prilagođena izrada u radionici</li>
+            <li>Konstrukcija od nehrđajućeg čelika 304 ili 316</li>
+            <li>Cat-back, axle-back ili puni sustav</li>
+            <li>Ventilni ispusi i kontrola zvuka po želji</li>
+            <li>Ugradnja dekatalizatora i sportskih katalizatora</li>
+            <li>Doživotno jamstvo na zavarene dijelove</li>
+          </ul>
+
+          <div style="margin-top:2rem;">
+            <a href="contact.html" class="btn-primary">Zatrazi Ponudu &#8594;</a>
+          </div>
+        </article>
+
+      </div>
+    </section>
+
+    <!-- ======================================================
+         TRAKA PROCESA
+    ====================================================== -->
+    <div style="background:var(--bg2); border-top:1px solid var(--border); border-bottom:1px solid var(--border); padding:4rem 2rem;">
+      <div class="container">
+        <p class="section-label" style="margin-bottom:2.5rem;">Kako Funkcionira</p>
+        <div class="process-strip-grid" style="display:grid; grid-template-columns:repeat(4,1fr); gap:2rem;">
+
+          <div style="display:flex; flex-direction:column; gap:0.75rem;">
+            <div style="font-family:var(--font-head); font-size:3rem; font-weight:700; color:var(--accent); line-height:1;">01</div>
+            <h3 style="font-family:var(--font-head); font-size:1.1rem; font-weight:700; text-transform:uppercase; letter-spacing:0.05em;">Upit</h3>
+            <p style="font-size:0.875rem; color:var(--fg-muted); line-height:1.7;">Kontaktiraj nas online ili telefonom. Opisi nam vozilo, svoje ciljeve i budžet.</p>
+          </div>
+
+          <div style="display:flex; flex-direction:column; gap:0.75rem;">
+            <div style="font-family:var(--font-head); font-size:3rem; font-weight:700; color:var(--accent); line-height:1;">02</div>
+            <h3 style="font-family:var(--font-head); font-size:1.1rem; font-weight:700; text-transform:uppercase; letter-spacing:0.05em;">Procjena</h3>
+            <p style="font-size:0.875rem; color:var(--fg-muted); line-height:1.7;">Pregledavamo i dijagnosticiramo polaznu točku prije nego što preporučimo plan izgradnje.</p>
+          </div>
+
+          <div style="display:flex; flex-direction:column; gap:0.75rem;">
+            <div style="font-family:var(--font-head); font-size:3rem; font-weight:700; color:var(--accent); line-height:1;">03</div>
+            <h3 style="font-family:var(--font-head); font-size:1.1rem; font-weight:700; text-transform:uppercase; letter-spacing:0.05em;">Izvedba</h3>
+            <p style="font-size:0.875rem; color:var(--fg-muted); line-height:1.7;">Naši tehničari izvode posao. Primaš ažuriranja tijekom cijelog procesa.</p>
+          </div>
+
+          <div style="display:flex; flex-direction:column; gap:0.75rem;">
+            <div style="font-family:var(--font-head); font-size:3rem; font-weight:700; color:var(--accent); line-height:1;">04</div>
+            <h3 style="font-family:var(--font-head); font-size:1.1rem; font-weight:700; text-transform:uppercase; letter-spacing:0.05em;">Preuzimanje</h3>
+            <p style="font-size:0.875rem; color:var(--fg-muted); line-height:1.7;">Preuzimanje uključuje potpuni razgovor, grafove dinamometra i savjete za održavanje.</p>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <!-- ======================================================
+         POZIV NA AKCIJU
+    ====================================================== -->
+    <section class="section" style="text-align:center;">
+      <p class="section-label" style="justify-content:center;">Počni</p>
+      <h2 class="section-title">Nisi Siguran Koju<br/><span class="accent">Uslugu Trebaš?</span></h2>
+      <p class="section-body" style="margin:0 auto 2.5rem; text-align:center;">
+        Pošalji nam poruku i jedan od naših specijalista procijeniti će tvoje potrebe
+        i preporučiti pravi paket.
+      </p>
+      <a href="contact.html" class="btn-primary">Kontaktiraj Specijalista &#8594;</a>
+    </section>
+
+  </main>
+
+  <!-- ======================================================
+       PODNOZJE
+  ====================================================== -->
+  <footer class="site-footer" role="contentinfo">
+    <div class="footer-grid">
+
+      <div class="footer-brand">
+        <div class="brand-main">Vinkovci Performance Garage</div>
+        <div class="brand-sub">Građeno Drugačije</div>
+        <p>Vrhunska automehaničarska radionica koja služi Slavoniju i širu okolicu od 2009. Ne popravljamo samo aute &mdash; mi ih transformiramo.</p>
+      </div>
+
+      <div class="footer-col">
+        <h4>Navigacija</h4>
+        <ul>
+          <li><a href="index.html">Početna</a></li>
+          <li><a href="services.html">Usluge</a></li>
+          <li><a href="gallery.html">Galerija</a></li>
+          <li><a href="contact.html">Kontakt</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <h4>Pronađi Nas</h4>
+        <address>
+          Ulica Stjepana Radića 12<br/>
+          32100 Vinkovci<br/>
+          Hrvatska<br/>
+          <br/>
+          <a href="tel:+38532000000" style="color:var(--accent);">+385 32 000 000</a>
+        </address>
+      </div>
+
+    </div>
+
+    
+      <span class="footer-copy">&copy; 2024. Vinkovci Performance Garage. Sva prava pridržana.</span>
+      <span class="footer-credit">Izrađeno s <span>&#9632;</span> preciznošću.</span>
+    </div>
+  </footer>
+
+</body>
+</html>

@@ -1,0 +1,660 @@
+<!DOCTYPE html>
+<html lang="hr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Kontakt & Rezervacija — Lumiere Studio</title>
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    /* ===== HERO ===== */
+    .stranica-hero {
+      background: var(--crna);
+      padding: 10rem 2rem 5rem;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .stranica-hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse at 50% 80%, rgba(212,175,55,0.07) 0%, transparent 60%);
+    }
+    .stranica-hero > * { position: relative; z-index: 1; }
+    .stranica-hero h1 { font-family: var(--font-naslov); font-size: clamp(2.5rem,5vw,4rem); color: var(--bijela); margin-bottom: 1rem; }
+    .stranica-hero h1 em { color: var(--zlato); font-style: italic; }
+    .stranica-hero p { color: rgba(255,255,255,0.55); max-width: 520px; margin: 0 auto; font-size: 0.9rem; line-height: 1.8; }
+
+    /* ===== KONTAKT GRID ===== */
+    .kontakt-grid {
+      display: grid;
+      grid-template-columns: 1fr 1.6fr;
+      gap: 5rem;
+      align-items: start;
+    }
+
+    /* ===== KONTAKT INFO ===== */
+    .kontakt-info { position: sticky; top: 8rem; }
+
+    .info-blok {
+      margin-bottom: 2.5rem;
+      padding-bottom: 2.5rem;
+      border-bottom: 1px solid var(--siva-srednja);
+    }
+
+    .info-blok:last-child { border-bottom: none; }
+
+    .info-blok-zaglavlje {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      margin-bottom: 1rem;
+    }
+
+    .info-ikona {
+      width: 42px;
+      height: 42px;
+      background: var(--crna);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .info-ikona svg { fill: var(--zlato); width: 20px; height: 20px; }
+
+    .info-blok-zaglavlje h3 {
+      font-family: var(--font-tijelo);
+      font-size: 0.7rem;
+      font-weight: 600;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--crna);
+    }
+
+    .info-blok p, .info-blok a {
+      font-size: 0.9rem;
+      color: var(--siva-tekst);
+      line-height: 1.8;
+      display: block;
+      transition: color 0.3s;
+    }
+
+    .info-blok a:hover { color: var(--zlato); }
+
+    /* Radno vrijeme */
+    .radno-grid {
+      display: grid;
+      gap: 0.4rem;
+    }
+
+    .radno-red {
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.85rem;
+      color: var(--siva-tekst);
+    }
+
+    .radno-red span:first-child { color: var(--crna); font-weight: 500; }
+
+    /* Karta placeholder */
+    .karta {
+      width: 100%;
+      height: 260px;
+      background: var(--siva-srednja);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      gap: 1rem;
+      position: relative;
+      overflow: hidden;
+      margin-top: 2.5rem;
+    }
+
+    .karta-embed {
+      width: 100%;
+      height: 100%;
+      border: none;
+      display: block;
+    }
+
+    .karta-fallback {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      gap: 0.75rem;
+      background: #e8e4dc;
+      width: 100%;
+      height: 100%;
+    }
+
+    .karta-fallback svg { fill: rgba(26,26,26,0.25); width: 40px; height: 40px; }
+    .karta-fallback p { font-size: 0.75rem; letter-spacing: 0.15em; text-transform: uppercase; color: rgba(26,26,26,0.4); }
+    .karta-fallback strong { font-family: var(--font-naslov); font-size: 1rem; color: rgba(26,26,26,0.6); display: block; text-align: center; }
+
+    .karta-adresa-tag {
+      position: absolute;
+      top: 0;
+      left: 0;
+      background: var(--crna);
+      color: var(--bijela);
+      font-size: 0.65rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      padding: 0.5rem 1rem;
+      font-weight: 600;
+    }
+
+    /* ===== FORMA ===== */
+    .forma-zaglavlje {
+      margin-bottom: 2.5rem;
+    }
+
+    .forma-zaglavlje h2 {
+      font-family: var(--font-naslov);
+      font-size: 2rem;
+      color: var(--crna);
+      margin-bottom: 0.5rem;
+    }
+
+    .forma-zaglavlje p {
+      font-size: 0.85rem;
+      color: var(--siva-tekst);
+      line-height: 1.7;
+    }
+
+    .forma-red {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.25rem;
+      margin-bottom: 1.25rem;
+    }
+
+    .forma-grupa {
+      margin-bottom: 1.25rem;
+    }
+
+    .forma-red .forma-grupa { margin-bottom: 0; }
+
+    .forma-grupa label {
+      display: block;
+      font-size: 0.68rem;
+      font-weight: 600;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--crna);
+      margin-bottom: 0.6rem;
+    }
+
+    .forma-polje {
+      width: 100%;
+      padding: 0.9rem 1.1rem;
+      font-family: var(--font-tijelo);
+      font-size: 0.88rem;
+      color: var(--crna);
+      background: var(--bijela);
+      border: 1px solid var(--siva-srednja);
+      border-radius: var(--radijus);
+      transition: border-color 0.3s, box-shadow 0.3s;
+      outline: none;
+      appearance: none;
+      -webkit-appearance: none;
+    }
+
+    .forma-polje:focus {
+      border-color: var(--zlato);
+      box-shadow: 0 0 0 3px rgba(212,175,55,0.12);
+    }
+
+    .forma-polje::placeholder { color: rgba(107, 101, 96, 0.5); }
+
+    select.forma-polje {
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%236b6560' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right 1rem center;
+      padding-right: 2.5rem;
+      cursor: pointer;
+    }
+
+    textarea.forma-polje {
+      resize: vertical;
+      min-height: 120px;
+    }
+
+    /* Radio gumbi */
+    .radio-grupa {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+
+    .radio-opcija {
+      position: relative;
+    }
+
+    .radio-opcija input {
+      position: absolute;
+      opacity: 0;
+      width: 0;
+      height: 0;
+    }
+
+    .radio-opcija label {
+      display: inline-block;
+      padding: 0.5rem 1.25rem;
+      border: 1px solid var(--siva-srednja);
+      font-size: 0.78rem;
+      font-weight: 500;
+      letter-spacing: 0.08em;
+      color: var(--siva-tekst);
+      cursor: pointer;
+      transition: var(--prijelaz);
+      text-transform: none;
+    }
+
+    .radio-opcija input:checked + label {
+      background: var(--crna);
+      color: var(--bijela);
+      border-color: var(--crna);
+    }
+
+    .radio-opcija label:hover { border-color: var(--crna); color: var(--crna); }
+
+    /* Privola */
+    .privola {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.75rem;
+      margin-bottom: 2rem;
+    }
+
+    .privola input[type="checkbox"] {
+      width: 16px;
+      height: 16px;
+      margin-top: 2px;
+      flex-shrink: 0;
+      accent-color: var(--zlato);
+      cursor: pointer;
+    }
+
+    .privola label {
+      font-size: 0.78rem;
+      color: var(--siva-tekst);
+      line-height: 1.6;
+      cursor: pointer;
+    }
+
+    .privola label a { color: var(--zlato); text-decoration: underline; }
+
+    /* Poruka potvrde */
+    .potvrda {
+      display: none;
+      background: #f0f9f0;
+      border: 1px solid #8bc98b;
+      border-left: 4px solid #4caf50;
+      padding: 1.25rem 1.5rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .potvrda.vidljiva { display: block; }
+
+    .potvrda h4 {
+      font-family: var(--font-tijelo);
+      font-size: 0.8rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: #2e7d32;
+      margin-bottom: 0.4rem;
+    }
+
+    .potvrda p { font-size: 0.85rem; color: #388e3c; }
+
+    /* ===== RESPONSIVE ===== */
+    @media (max-width: 900px) {
+      .kontakt-grid { grid-template-columns: 1fr; gap: 3rem; }
+      .kontakt-info { position: static; }
+    }
+
+    @media (max-width: 600px) {
+      .forma-red { grid-template-columns: 1fr; }
+      .radio-grupa { flex-direction: column; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAVIGACIJA -->
+  <nav class="nav tamna">
+    <a href="index.html" class="nav-logo">Lumiere<span>Studio</span></a>
+    <ul class="nav-links">
+      <li><a href="index.html">Početna</a></li>
+      <li><a href="usluge.html">Usluge</a></li>
+      <li><a href="galerija.html">Galerija</a></li>
+      <li><a href="kontakt.html">Kontakt</a></li>
+      <li><a href="kontakt.html" class="gumb gumb-primarni">Rezerviraj</a></li>
+    </ul>
+    <button class="nav-hamburger" aria-label="Izbornik">
+      <span></span><span></span><span></span>
+    </button>
+  </nav>
+
+  <!-- HERO -->
+  <div class="stranica-hero">
+    <p class="podnaslov-sekcija">Rezervirajte termin</p>
+    <h1>Kontakt & <em>Rezervacija</em></h1>
+    <div class="linija-zlato" style="display:block;margin:1.5rem auto;"></div>
+    <p>Rezervirajte termin online ili nas kontaktirajte direktno. Odgovaramo unutar 24 sata radnim danima.</p>
+  </div>
+
+  <!-- KONTAKT SADRZAJ -->
+  <section class="sekcija">
+    <div class="kontejner">
+      <div class="kontakt-grid">
+
+        <!-- LIJEVA STRANA: INFO -->
+        <div class="kontakt-info animiraj-lijevo">
+
+          <div class="info-blok">
+            <div class="info-blok-zaglavlje">
+              <div class="info-ikona">
+                <svg viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+              </div>
+              <h3>Lokacija</h3>
+            </div>
+            <p>Ilica 42<br>10000 Zagreb<br>Hrvatska</p>
+          </div>
+
+          <div class="info-blok">
+            <div class="info-blok-zaglavlje">
+              <div class="info-ikona">
+                <svg viewBox="0 0 24 24"><path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/></svg>
+              </div>
+              <h3>Telefon</h3>
+            </div>
+            <a href="tel:+38512345678">+385 1 234 5678</a>
+            <a href="mailto:info@lumierestudio.hr">info@lumierestudio.hr</a>
+          </div>
+
+          <div class="info-blok">
+            <div class="info-blok-zaglavlje">
+              <div class="info-ikona">
+                <svg viewBox="0 0 24 24"><path d="M17 12h-5v5h5v-5zM16 1v2H8V1H6v2H5c-1.11 0-1.99.9-1.99 2L3 19c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2h-1V1h-2zm3 18H5V8h14v11z"/></svg>
+              </div>
+              <h3>Radno vrijeme</h3>
+            </div>
+            <div class="radno-grid">
+              <div class="radno-red"><span>Ponedjeljak</span><span>9:00 – 20:00</span></div>
+              <div class="radno-red"><span>Utorak</span><span>9:00 – 20:00</span></div>
+              <div class="radno-red"><span>Srijeda</span><span>9:00 – 20:00</span></div>
+              <div class="radno-red"><span>Četvrtak</span><span>9:00 – 20:00</span></div>
+              <div class="radno-red"><span>Petak</span><span>9:00 – 21:00</span></div>
+              <div class="radno-red"><span>Subota</span><span>9:00 – 18:00</span></div>
+              <div class="radno-red"><span>Nedjelja</span><span style="color:#e57373;">Zatvoreno</span></div>
+            </div>
+          </div>
+
+          <!-- KARTA -->
+          <div class="karta">
+            <iframe
+              class="karta-embed"
+              src="https://www.openstreetmap.org/export/embed.html?bbox=15.9600%2C45.8100%2C15.9800%2C45.8200&layer=mapnik&marker=45.8150%2C15.9700"
+              title="Lumiere Studio lokacija"
+              loading="lazy"
+              allowfullscreen
+              onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';"
+            ></iframe>
+            <div class="karta-fallback" style="display:none;">
+              <svg viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+              <strong>Lumiere Studio</strong>
+              <p>Ilica 42, Zagreb</p>
+            </div>
+            <div class="karta-adresa-tag">Ilica 42, Zagreb</div>
+          </div>
+
+        </div>
+
+        <!-- DESNA STRANA: FORMA -->
+        <div class="animiraj-desno">
+          <div class="forma-zaglavlje">
+            <p class="podnaslov-sekcija">Rezervacija online</p>
+            <h2>Zakažite termin</h2>
+            <div class="linija-zlato"></div>
+            <p>Ispunite obrazac i javit ćemo vam se u roku od nekoliko sati kako bismo potvrdili vaš termin.</p>
+          </div>
+
+          <div class="potvrda" id="potvrda">
+            <h4>Hvala na rezervaciji</h4>
+            <p>Vaša rezervacija je primljena. Kontaktirat ćemo vas u najkraćem mogućem roku kako bismo potvrdili termin.</p>
+          </div>
+
+          <form id="rezervacijaForma" novalidate>
+
+            <div class="forma-red">
+              <div class="forma-grupa">
+                <label for="ime">Ime *</label>
+                <input type="text" id="ime" name="ime" class="forma-polje" placeholder="Vaše ime" required />
+              </div>
+              <div class="forma-grupa">
+                <label for="prezime">Prezime *</label>
+                <input type="text" id="prezime" name="prezime" class="forma-polje" placeholder="Vaše prezime" required />
+              </div>
+            </div>
+
+            <div class="forma-red">
+              <div class="forma-grupa">
+                <label for="email">E-mail adresa *</label>
+                <input type="email" id="email" name="email" class="forma-polje" placeholder="vasa@email.com" required />
+              </div>
+              <div class="forma-grupa">
+                <label for="telefon">Broj telefona *</label>
+                <input type="tel" id="telefon" name="telefon" class="forma-polje" placeholder="+385 9X XXX XXXX" required />
+              </div>
+            </div>
+
+            <div class="forma-grupa">
+              <label for="usluga">Vrsta usluge *</label>
+              <select id="usluga" name="usluga" class="forma-polje" required>
+                <option value="" disabled selected>Odaberite uslugu</option>
+                <optgroup label="Frizura">
+                  <option>Šišanje i styling</option>
+                  <option>Pranje i sušenje</option>
+                  <option>Svečana frizura</option>
+                </optgroup>
+                <optgroup label="Bojanje">
+                  <option>Jednobojno bojanje</option>
+                  <option>Balayage</option>
+                  <option>Ombre / Highlights</option>
+                </optgroup>
+                <optgroup label="Nokti">
+                  <option>Klasična manikura</option>
+                  <option>Gel manikura</option>
+                  <option>Izgradnja noktiju</option>
+                  <option>Pedikura</option>
+                </optgroup>
+                <optgroup label="Tretmani">
+                  <option>Keratin tretman</option>
+                  <option>Botoks za kosu</option>
+                  <option>Olaplex tretman</option>
+                </optgroup>
+                <optgroup label="Paketi">
+                  <option>Paket Svježina</option>
+                  <option>Lumiere Ritual</option>
+                  <option>Paket Vjenčanica</option>
+                </optgroup>
+              </select>
+            </div>
+
+            <div class="forma-red">
+              <div class="forma-grupa">
+                <label for="datum">Željeni datum *</label>
+                <input type="date" id="datum" name="datum" class="forma-polje" required />
+              </div>
+              <div class="forma-grupa">
+                <label for="vrijeme">Željeno vrijeme *</label>
+                <select id="vrijeme" name="vrijeme" class="forma-polje" required>
+                  <option value="" disabled selected>Odaberite</option>
+                  <option>9:00</option>
+                  <option>9:30</option>
+                  <option>10:00</option>
+                  <option>10:30</option>
+                  <option>11:00</option>
+                  <option>11:30</option>
+                  <option>12:00</option>
+                  <option>13:00</option>
+                  <option>13:30</option>
+                  <option>14:00</option>
+                  <option>14:30</option>
+                  <option>15:00</option>
+                  <option>15:30</option>
+                  <option>16:00</option>
+                  <option>16:30</option>
+                  <option>17:00</option>
+                  <option>17:30</option>
+                  <option>18:00</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="forma-grupa">
+              <label>Tip kose (za usluge kose)</label>
+              <div class="radio-grupa">
+                <div class="radio-opcija">
+                  <input type="radio" name="tipKose" id="kratka" value="kratka" />
+                  <label for="kratka">Kratka</label>
+                </div>
+                <div class="radio-opcija">
+                  <input type="radio" name="tipKose" id="srednja" value="srednja" />
+                  <label for="srednja">Srednja</label>
+                </div>
+                <div class="radio-opcija">
+                  <input type="radio" name="tipKose" id="duga" value="duga" />
+                  <label for="duga">Duga</label>
+                </div>
+                <div class="radio-opcija">
+                  <input type="radio" name="tipKose" id="nijeVazno" value="nijeVazno" />
+                  <label for="nijeVazno">Nije primjenljivo</label>
+                </div>
+              </div>
+            </div>
+
+            <div class="forma-grupa">
+              <label for="poruka">Dodatne napomene</label>
+              <textarea id="poruka" name="poruka" class="forma-polje" placeholder="Opišite željeni rezultat ili navedite posebne zahtjeve..."></textarea>
+            </div>
+
+            <div class="privola">
+              <input type="checkbox" id="privola" name="privola" required />
+              <label for="privola">
+                Suglasan/na sam s <a href="#">uvjetima korištenja</a> i <a href="#">politikom privatnosti</a>.
+                Moji podaci koristit će se isključivo u svrhu potvrde rezervacije.
+              </label>
+            </div>
+
+            <button type="submit" class="gumb gumb-primarni" style="width:100%;">Pošalji rezervaciju</button>
+
+            <p style="font-size:0.75rem;color:var(--siva-tekst);margin-top:1rem;text-align:center;">
+              * Polja označena zvjezdicom su obavezna. Odgovaramo unutar 24 sata radnim danima.
+            </p>
+          </form>
+
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="footer-grid">
+      <div>
+        <div class="footer-logo">Lumiere<span>Studio</span></div>
+        <p>Premium frizerski i beauty salon u srcu grada. Posvećeni vašoj ljepoti od 2012. godine.</p>
+      </div>
+      <div>
+        <h4>Brze veze</h4>
+        <ul class="footer-links">
+          <li><a href="index.html">Početna</a></li>
+          <li><a href="usluge.html">Usluge i cijene</a></li>
+          <li><a href="galerija.html">Galerija</a></li>
+          <li><a href="kontakt.html">Rezervacija</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Kontakt</h4>
+        <ul class="footer-links">
+          <li><a href="tel:+38512345678">+385 1 234 5678</a></li>
+          <li><a href="mailto:info@lumierestudio.hr">info@lumierestudio.hr</a></li>
+          <li>Ilica 42, Zagreb</li>
+          <li>Pon - Sub: 9:00 - 20:00</li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-dno">
+      <span>2024 Lumiere Studio. Sva prava pridržana.</span>
+      <span>Dizajnirano s ljubavlju u Zagrebu</span>
+    </div>
+  </footer>
+
+  <!-- PLUTAJUCI GUMBI -->
+  <div class="plutajuci-gumbi">
+    <a href="https://wa.me/38512345678" class="plutajuci-gumb plutajuci-gumb-whatsapp" target="_blank" rel="noopener" aria-label="Kontaktiraj putem WhatsApp-a">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+    </a>
+    <a href="tel:+38512345678" class="plutajuci-gumb plutajuci-gumb-poziv" aria-label="Pozovi nas">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="var(--crna)"><path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/></svg>
+    </a>
+  </div>
+
+  <button class="natrag-gore" aria-label="Natrag na vrh">&#8593;</button>
+
+  <script src="script.js"></script>
+  <script>
+    // Postavi minimalni datum na danas
+    (function () {
+      const datumPolje = document.getElementById('datum');
+      if (!datumPolje) return;
+      const danas = new Date();
+      const dd = String(danas.getDate()).padStart(2, '0');
+      const mm = String(danas.getMonth() + 1).padStart(2, '0');
+      const yyyy = danas.getFullYear();
+      datumPolje.min = `${yyyy}-${mm}-${dd}`;
+    })();
+
+    // Forma submit
+    document.getElementById('rezervacijaForma').addEventListener('submit', function (e) {
+      e.preventDefault();
+
+      const required = this.querySelectorAll('[required]');
+      let validan = true;
+
+      required.forEach(polje => {
+        polje.style.borderColor = '';
+        if (!polje.value.trim() || (polje.type === 'checkbox' && !polje.checked)) {
+          polje.style.borderColor = '#e57373';
+          validan = false;
+        }
+      });
+
+      if (!validan) {
+        const prvi = this.querySelector('[required][style*="e57373"]');
+        if (prvi) prvi.focus();
+        return;
+      }
+
+      // Simulacija slanja
+      const gumb = this.querySelector('button[type="submit"]');
+      gumb.textContent = 'Saljem...';
+      gumb.disabled = true;
+
+      setTimeout(() => {
+        document.getElementById('potvrda').classList.add('vidljiva');
+        this.reset();
+        gumb.textContent = 'Pošalji rezervaciju';
+        gumb.disabled = false;
+        window.scrollTo({ top: document.getElementById('potvrda').getBoundingClientRect().top + window.scrollY - 100, behavior: 'smooth' });
+      }, 1200);
+    });
+  </script>
+</body>
+</html>

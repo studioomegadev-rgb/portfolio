@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="hr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hell0qt | Shop</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="main.css">
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Coiny&display=swap');
+</style>
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/11.4.8/sweetalert2.min.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+<body>
+    <!-- Header -->
+  <header>
+        <div class="container">
+         <div class="container">
+            <div class="header-content">
+                <div class="logo-container">
+                    <img src="img/helloqt-removebg-preview.png" alt="Hell0qt Logo" class="logo">
+                </div>
+                
+                <ul class="desktop-nav">
+                    <li><a href="index.html" >Početna</a></li>
+                    <li><a href="shop.html" class="active">Shop</a></li>
+                    <li><a href="recenzije.html">Recenzije</a></li>
+                    <li><a href="onama.html">O nama</a></li>
+                     <i class="fas fa-shopping-cart"></i>
+                </ul>
+
+                <!-- Mobile navigacija (hamburger) -->
+                <div class="mobile-nav">
+                    <div class="burger-omotac">
+                        <div class="burger-kontainer">
+                            <div class="burger-menu">
+                                <div class="burger-gornji"></div>
+                                <div class="burger-srednji"></div>
+                                <div class="burger-donji"></div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="mobile-menu">
+                        <ul>
+                            <li><a href="index.html" class="active">Početna</a></li>
+                            <li><a href="shop.html">Shop</a></li>
+                            <li><a href="recenzije.html">Recenzije</a></li>
+                            <li><a href="onama.html">O nama</a></li>
+                             <i class="fas fa-shopping-cart"></i>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+  
+    <div class="container main-grid">
+        <!-- Webshop sekcija -->
+        <section class="webshop">
+            <h2 class="section-title">Shop</h2>
+            
+            <!-- Prikaz proizvoda -->
+            <div class="products-grid" id="productsGrid">
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="./img/zec.jpg.jpeg" alt="Zec">
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-title">Zec</h3>
+                        <p class="product-price">€ 199.99</p>
+                        <div class="product-actions">
+                            <button class="btn-product btn-add">Dodaj u košaricu</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="./img/planet.jpg.jpeg" alt="Zemlja">
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-title">Zemlja</h3>
+                        <p class="product-price">€ 299.99</p>
+                        <div class="product-actions">
+                            <button class="btn-product btn-add">Dodaj u košaricu</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="./img/medvjed1.jpg.jpeg" alt="Medvjed">
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-title">Medvjed</h3>
+                        <p class="product-price">€ 149.99</p>
+                        <div class="product-actions">
+                            <button class="btn-product btn-add">Dodaj u košaricu</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="./img/macka.jpg.jpeg" alt="Mačka">
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-title">Mačka</h3>
+                        <p class="product-price">€ 129.99</p>
+                        <div class="product-actions">
+                            <button class="btn-product btn-add">Dodaj u košaricu</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="./img/medvjed2.jpg.jpeg" alt="Medvjed">
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-title">Medvjed</h3>
+                        <p class="product-price">€ 499.99</p>
+                        <div class="product-actions">
+                            <button class="btn-product btn-add">Dodaj u košaricu</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="./img/jednorog.jpg.jpeg" alt="Jednorog">
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-title">Jednorog</h3>
+                        <p class="product-price">€ 179.99</p>
+                        <div class="product-actions">
+                            <button class="btn-product btn-add">Dodaj u košaricu</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Galerija slika -->
+        <section class="gallery">
+            <h2 class="section-title">Uskoro u prodaji</h2>
+            <div class="gallery-grid">
+                <div class="gallery-item">
+                    <img src="./img/medvjed3.jpg.jpeg" alt="Galerija slika 1" class="gallery-image">
+                    <div class="gallery-overlay">
+                        <h3 class="gallery-title">Medvjed</h3>
+                    </div>
+                </div>
+                <div class="gallery-item">
+                    <img src="./img/zecic.jpg.jpeg" alt="Galerija slika 2" class="gallery-image">
+                    <div class="gallery-overlay">
+                        <h3 class="gallery-title">Zečić</h3>
+                    </div>
+                </div>
+                <div class="gallery-item">
+                    <img src="./img/dupin.jpg.jpeg" alt="Galerija slika 3" class="gallery-image">
+                    <div class="gallery-overlay">
+                        <h3 class="gallery-title">Krava</h3>
+                    </div>
+                </div>
+                <div class="gallery-item">
+                    <img src="./img/squishy-5252706_1280.jpg.jpeg" alt="Galerija slika 4" class="gallery-image">
+                    <div class="gallery-overlay">
+                        <h3 class="gallery-title">Stress loptica</h3>
+                    </div>
+                </div>
+                <div class="gallery-item">
+                    <img src="./img/jelen.jpg.jpeg" alt="Galerija slika 5" class="gallery-image">
+                    <div class="gallery-overlay">
+                        <h3 class="gallery-title">Jelen</h3>
+                    </div>
+                </div>
+                <div class="gallery-item">
+                    <img src="./img/dinosaurs-6051941_1280.jpg.jpeg" alt="Galerija slika 6" class="gallery-image">
+                    <div class="gallery-overlay">
+                        <h3 class="gallery-title">Dinosaur</h3>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>O nama</h3>
+                    <ul class="footer-links">
+                        <li><a href="o-nama.html">Naša priča</a></li>
+                        <li><a href="o-nama.html">Tim</a></li>
+                        <li><a href="onama.html">Karijere</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Proizvodi</h3>
+                    <ul class="footer-links">
+                        <li><a href="shop.html">Svi proizvodi</a></li>
+                        <li><a href="shop.html">Najprodavaniji</a></li>
+                        <li><a href="shop.html">Novi proizvodi</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Kontakt</h3>
+                    <ul class="footer-links">
+                        <li><a href="onama.html">info@hell0qt.hr</a></li>
+                        <li><a href="onama.html">+385 1 234 5678</a></li>
+                        <li><a href="onama.html">Lokacija</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Pratite nas</h3>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 Hell0qt. Studio Omega</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+
+        <script>
+document.addEventListener('DOMContentLoaded', function() {
+    const burger = document.querySelector('.burger-kontainer');
+    const mobileMenu = document.querySelector('.mobile-menu');
+    const body = document.body;
+    
+    burger.addEventListener('click', function() {
+        this.classList.toggle('open');
+        mobileMenu.classList.toggle('open');
+        body.classList.toggle('no-scroll');
+        
+        // Animacija burger ikone
+        const top = this.querySelector('.burger-gornji');
+        const middle = this.querySelector('.burger-srednji');
+        const bottom = this.querySelector('.burger-donji');
+        
+        if (this.classList.contains('open')) {
+            top.style.transform = 'rotate(45deg) translate(5px, 5px)';
+            middle.style.opacity = '0';
+            bottom.style.transform = 'rotate(-45deg) translate(5px, -5px)';
+        } else {
+            top.style.transform = '';
+            middle.style.opacity = '';
+            bottom.style.transform = '';
+        }
+    });
+});
+ 
+</script>
+</body>
+</html>

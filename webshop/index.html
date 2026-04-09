@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="hr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hell0qt | Početna</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/burger/2.0.2/scripts/burger.min.js">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/burger/2.0.2/css/burger.min.css">
+    <link rel="stylesheet" href="main.css">
+    <style>
+@import url('https://fonts.googleapis.com/css2?family=Coiny&display=swap');
+</style>
+
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container">
+         <div class="container">
+            <div class="header-content">
+                <div class="logo-container">
+                    <img src="img/helloqt-removebg-preview.png" alt="Hell0qt Logo" class="logo">
+                </div>
+                
+                <ul class="desktop-nav">
+                    <li><a href="index.html" class="active">Početna</a></li>
+                    <li><a href="shop.html">Shop</a></li>
+                    <li><a href="recenzije.html">Recenzije</a></li>
+                    <li><a href="onama.html">O nama</a></li>
+                     <i class="fas fa-shopping-cart"></i>
+                </ul>
+
+                <!-- Mobile navigacija (hamburger) -->
+                <div class="mobile-nav">
+                    <div class="burger-omotac">
+                        <div class="burger-kontainer">
+                            <div class="burger-menu">
+                                <div class="burger-gornji"></div>
+                                <div class="burger-srednji"></div>
+                                <div class="burger-donji"></div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="mobile-menu">
+                        <ul>
+                            <li><a href="index.html" class="active">Početna</a></li>
+                            <li><a href="shop.html">Shop</a></li>
+                            <li><a href="recenzije.html">Recenzije</a></li>
+                            <li><a href="onama.html">O nama</a></li>
+                             <i class="fas fa-shopping-cart"></i>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <div class="container main-grid">
+        <!-- Hero sekcija sa sliderom -->
+        <section class="hero">
+            <div class="slider-container">
+                <div class="slider" id="slider">
+                    <div class="slide active">
+                        <div class="slide-content">
+                            <h2>15% Popusta na sve proizvode uz kod</h2>
+                            <p>"studi00mega"</p>
+                            <a href="shop.html" class="btn-primary">Pregledaj ponudu</a>
+                        </div>
+                    </div>
+                    <div class="slide">
+                        <div class="slide-content">
+                            <h2>Novi proizvodi u našoj trgovini</h2>
+                            <p>Istražite najnovije modele po najpovoljnijim cijenama</p>
+                            <a href="shop.html" class="btn-primary">Saznaj više</a>
+                        </div>
+                    </div>
+                    <div class="slide">
+                        <div class="slide-content">
+                            <h2>Besplatna dostava za narudžbe iznad 50€</h2>
+                            <p>Naručite danas i uživajte u brzoj dostavi</p>
+                            <a href="shop.html" class="btn-primary">Naruči odmah</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="slider-controls">
+                    <div class="slider-arrow prev-arrow" id="prevSlide">
+                        <i class="fas fa-chevron-left"></i>
+                    </div>
+                    <div class="slider-arrow next-arrow" id="nextSlide">
+                        <i class="fas fa-chevron-right"></i>
+                    </div>
+                </div>
+                <div class="slider-dots" id="sliderDots">
+                    <div class="slider-dot active"></div>
+                    <div class="slider-dot"></div>
+                    <div class="slider-dot"></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Tekst sekcija -->
+        <section class="text-section">
+            <div class="text-content">
+                <h2>Dobrodošli na Hell0qt</h2>
+                <p>Otkrijte našu ekskluzivnu kolekciju proizvoda koji će zadovoljiti sve vaše potrebe. Naša trgovina nudi raznolik izbor visokokvalitetnih proizvoda po pristupačnim cijenama. Bilo da tražite zeca, medvjeda, mačku ili druge proizvode, na pravom ste mjestu.</p>
+                <p>Naša predanost kvaliteti i zadovoljstvu kupaca čini nas jednim od vodećih brendova na tržištu. Iskoristite posebne popuste i promotivne ponude koje trenutno nudimo.</p>
+                <a href="shop.html" class="btn-secondary">Istraži ponudu</a>
+            </div>
+        </section>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>O nama</h3>
+                    <ul class="footer-links">
+                        <li><a href="o-nama.html">Naša priča</a></li>
+                        <li><a href="o-nama.html">Tim</a></li>
+                        <li><a href="onama.html">Karijere</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Proizvodi</h3>
+                    <ul class="footer-links">
+                        <li><a href="shop.html">Svi proizvodi</a></li>
+                        <li><a href="shop.html">Najprodavaniji</a></li>
+                        <li><a href="shop.html">Novi proizvodi</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Kontakt</h3>
+                    <ul class="footer-links">
+                        <li><a href="onama.html">info@hell0qt.hr</a></li>
+                        <li><a href="onama.html">+385 1 234 5678</a></li>
+                        <li><a href="onama.html">Lokacija</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Pratite nas</h3>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 Hell0qt. Studio Omega</p>
+            </div>
+        </div>
+    </footer>
+    
+    <script src="script.js"></script>
+
+    <script>
+
+document.addEventListener('DOMContentLoaded', function() {
+    const burger = document.querySelector('.burger-kontainer');
+    const mobileMenu = document.querySelector('.mobile-menu');
+    const body = document.body;
+    
+    burger.addEventListener('click', function() {
+        this.classList.toggle('open');
+        mobileMenu.classList.toggle('open');
+        body.classList.toggle('no-scroll');
+        
+        // Animacija burger ikone
+        const top = this.querySelector('.burger-gornji');
+        const middle = this.querySelector('.burger-srednji');
+        const bottom = this.querySelector('.burger-donji');
+        
+        if (this.classList.contains('open')) {
+            top.style.transform = 'rotate(45deg) translate(5px, 5px)';
+            middle.style.opacity = '0';
+            bottom.style.transform = 'rotate(-45deg) translate(5px, -5px)';
+        } else {
+            top.style.transform = '';
+            middle.style.opacity = '';
+            bottom.style.transform = '';
+        }
+    });
+});
+    </script>
+</body>
+</html>

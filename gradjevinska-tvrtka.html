@@ -1,0 +1,1282 @@
+<!DOCTYPE html>
+<html lang="hr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ProBuild - Gradimo kvalitetu koja traje</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800;900&family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --dark-gray: #1a1a1a;
+            --medium-gray: #2d2d2d;
+            --light-gray: #4a4a4a;
+            --orange: #ff6b35;
+            --orange-hover: #e55a28;
+            --white: #ffffff;
+            --off-white: #f8f8f8;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Roboto', sans-serif;
+            line-height: 1.6;
+            color: var(--dark-gray);
+            overflow-x: hidden;
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            line-height: 1.2;
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(26, 26, 26, 0.95);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            transition: all 0.3s ease;
+        }
+
+        nav.scrolled {
+            background: rgba(26, 26, 26, 0.98);
+            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        .nav-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.2rem 2rem;
+        }
+
+        .logo {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1.8rem;
+            font-weight: 900;
+            color: var(--white);
+            letter-spacing: -1px;
+        }
+
+        .logo span {
+            color: var(--orange);
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2.5rem;
+        }
+
+        .nav-links a {
+            color: var(--white);
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 0.95rem;
+            transition: color 0.3s ease;
+            position: relative;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--orange);
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .nav-links a:hover {
+            color: var(--orange);
+        }
+
+        .menu-toggle {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+            gap: 5px;
+        }
+
+        .menu-toggle span {
+            width: 25px;
+            height: 3px;
+            background: var(--white);
+            transition: all 0.3s ease;
+        }
+
+        /* Hero Section */
+        .hero {
+            height: 100vh;
+            background: linear-gradient(rgba(26, 26, 26, 0.6), rgba(26, 26, 26, 0.6)), 
+                        url('https://images.unsplash.com/photo-1541888946425-d81bb19240f5?w=1600&q=80') center/cover;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: var(--white);
+            position: relative;
+        }
+
+        .hero-content {
+            max-width: 900px;
+            padding: 2rem;
+            animation: fadeInUp 1s ease;
+        }
+
+        .hero h1 {
+            font-size: 4rem;
+            font-weight: 900;
+            margin-bottom: 1.5rem;
+            text-transform: uppercase;
+            letter-spacing: -2px;
+        }
+
+        .hero h1 span {
+            color: var(--orange);
+        }
+
+        .hero p {
+            font-size: 1.3rem;
+            margin-bottom: 2.5rem;
+            font-weight: 300;
+            line-height: 1.8;
+        }
+
+        .cta-button {
+            display: inline-block;
+            padding: 1rem 3rem;
+            background: var(--orange);
+            color: var(--white);
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 1.1rem;
+            border-radius: 5px;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            box-shadow: 0 4px 15px rgba(255, 107, 53, 0.3);
+        }
+
+        .cta-button:hover {
+            background: var(--orange-hover);
+            transform: translateY(-3px);
+            box-shadow: 0 6px 25px rgba(255, 107, 53, 0.4);
+        }
+
+        /* Section Styles */
+        section {
+            padding: 6rem 2rem;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        .section-title h2 {
+            font-size: 2.8rem;
+            font-weight: 800;
+            margin-bottom: 1rem;
+            text-transform: uppercase;
+            letter-spacing: -1px;
+        }
+
+        .section-title h2 span {
+            color: var(--orange);
+        }
+
+        .section-title p {
+            font-size: 1.1rem;
+            color: var(--light-gray);
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        /* O Nama */
+        #o-nama {
+            background: var(--off-white);
+        }
+
+        .about-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .about-content h3 {
+            font-size: 2rem;
+            margin-bottom: 1.5rem;
+            color: var(--dark-gray);
+        }
+
+        .about-content p {
+            margin-bottom: 1.5rem;
+            line-height: 1.8;
+            color: var(--light-gray);
+        }
+
+        .about-features {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .feature-item {
+            background: var(--white);
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+            transition: all 0.3s ease;
+        }
+
+        .feature-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+        }
+
+        .feature-item h4 {
+            color: var(--orange);
+            margin-bottom: 0.8rem;
+            font-size: 1.3rem;
+        }
+
+        .feature-item p {
+            color: var(--light-gray);
+            font-size: 0.95rem;
+        }
+
+        .about-image {
+            height: 600px;
+            border-radius: 10px;
+            background: url('https://images.unsplash.com/photo-1590496793907-4e0e5133e05f?w=800&q=80') center/cover;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Usluge */
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2.5rem;
+        }
+
+        .service-card {
+            background: var(--white);
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+            transition: all 0.4s ease;
+            cursor: pointer;
+        }
+
+        .service-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
+        }
+
+        .service-image {
+            height: 250px;
+            background-size: cover;
+            background-position: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .service-image::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to bottom, transparent, rgba(26, 26, 26, 0.7));
+        }
+
+        .service-card:hover .service-image::before {
+            background: linear-gradient(to bottom, transparent, rgba(255, 107, 53, 0.7));
+        }
+
+        .service-content {
+            padding: 2rem;
+        }
+
+        .service-content h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: var(--dark-gray);
+        }
+
+        .service-content p {
+            color: var(--light-gray);
+            line-height: 1.7;
+            margin-bottom: 1.5rem;
+        }
+
+        .service-link {
+            color: var(--orange);
+            text-decoration: none;
+            font-weight: 600;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: gap 0.3s ease;
+        }
+
+        .service-link:hover {
+            gap: 1rem;
+        }
+
+        /* Projekti */
+        #projekti {
+            background: var(--off-white);
+        }
+
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+        }
+
+        .project-card {
+            position: relative;
+            height: 350px;
+            border-radius: 10px;
+            overflow: hidden;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .project-image {
+            width: 100%;
+            height: 100%;
+            background-size: cover;
+            background-position: center;
+            transition: transform 0.5s ease;
+        }
+
+        .project-card:hover .project-image {
+            transform: scale(1.1);
+        }
+
+        .project-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            padding: 2rem;
+            background: linear-gradient(to top, rgba(26, 26, 26, 0.95), transparent);
+            color: var(--white);
+            transform: translateY(100%);
+            transition: transform 0.4s ease;
+        }
+
+        .project-card:hover .project-overlay {
+            transform: translateY(0);
+        }
+
+        .project-overlay h3 {
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .project-overlay p {
+            font-size: 0.95rem;
+            opacity: 0.9;
+        }
+
+        /* Zašto Mi */
+        .why-us-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 2rem;
+        }
+
+        .why-card {
+            text-align: center;
+            padding: 2.5rem 1.5rem;
+            background: var(--white);
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+            transition: all 0.3s ease;
+        }
+
+        .why-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .why-icon {
+            width: 80px;
+            height: 80px;
+            background: var(--orange);
+            border-radius: 50%;
+            margin: 0 auto 1.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2.5rem;
+            color: var(--white);
+            box-shadow: 0 4px 15px rgba(255, 107, 53, 0.3);
+        }
+
+        .why-card h3 {
+            font-size: 1.3rem;
+            margin-bottom: 1rem;
+            color: var(--dark-gray);
+        }
+
+        .why-card p {
+            color: var(--light-gray);
+            line-height: 1.7;
+        }
+
+        /* Statistika */
+        #statistika {
+            background: var(--dark-gray);
+            color: var(--white);
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 3rem;
+            text-align: center;
+        }
+
+        .stat-item {
+            padding: 2rem;
+        }
+
+        .stat-number {
+            font-size: 4rem;
+            font-weight: 900;
+            color: var(--orange);
+            margin-bottom: 0.5rem;
+            font-family: 'Montserrat', sans-serif;
+        }
+
+        .stat-label {
+            font-size: 1.1rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-weight: 500;
+        }
+
+        /* Recenzije */
+        #recenzije {
+            background: var(--off-white);
+        }
+
+        .testimonials-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2.5rem;
+        }
+
+        .testimonial-card {
+            background: var(--white);
+            padding: 2.5rem;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+            position: relative;
+            transition: all 0.3s ease;
+        }
+
+        .testimonial-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+        }
+
+        .testimonial-quote {
+            font-size: 4rem;
+            color: var(--orange);
+            opacity: 0.2;
+            position: absolute;
+            top: 1rem;
+            left: 1.5rem;
+            font-family: Georgia, serif;
+        }
+
+        .testimonial-text {
+            margin-bottom: 2rem;
+            font-style: italic;
+            color: var(--light-gray);
+            line-height: 1.8;
+            position: relative;
+            z-index: 1;
+        }
+
+        .testimonial-author {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .author-avatar {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: var(--orange);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--white);
+            font-size: 1.5rem;
+            font-weight: 700;
+        }
+
+        .author-info h4 {
+            font-size: 1.1rem;
+            margin-bottom: 0.3rem;
+            color: var(--dark-gray);
+        }
+
+        .author-info p {
+            font-size: 0.9rem;
+            color: var(--light-gray);
+        }
+
+        /* Kontakt */
+        #kontakt {
+            background: var(--white);
+        }
+
+        .contact-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+        }
+
+        .contact-form {
+            background: var(--off-white);
+            padding: 3rem;
+            border-radius: 10px;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+            color: var(--dark-gray);
+        }
+
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 1rem;
+            border: 2px solid #e0e0e0;
+            border-radius: 5px;
+            font-family: 'Roboto', sans-serif;
+            font-size: 1rem;
+            transition: border-color 0.3s ease;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: var(--orange);
+        }
+
+        .form-group textarea {
+            resize: vertical;
+            min-height: 150px;
+        }
+
+        .submit-button {
+            width: 100%;
+            padding: 1.2rem;
+            background: var(--orange);
+            color: var(--white);
+            border: none;
+            border-radius: 5px;
+            font-size: 1.1rem;
+            font-weight: 700;
+            cursor: pointer;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: all 0.3s ease;
+        }
+
+        .submit-button:hover {
+            background: var(--orange-hover);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(255, 107, 53, 0.3);
+        }
+
+        .contact-info {
+            padding: 2rem;
+        }
+
+        .info-item {
+            display: flex;
+            gap: 1.5rem;
+            margin-bottom: 2.5rem;
+        }
+
+        .info-icon {
+            width: 50px;
+            height: 50px;
+            background: var(--orange);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--white);
+            font-size: 1.3rem;
+            flex-shrink: 0;
+        }
+
+        .info-content h3 {
+            font-size: 1.2rem;
+            margin-bottom: 0.5rem;
+            color: var(--dark-gray);
+        }
+
+        .info-content p {
+            color: var(--light-gray);
+            line-height: 1.7;
+        }
+
+        .map-container {
+            margin-top: 3rem;
+            border-radius: 10px;
+            overflow: hidden;
+            height: 350px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .map-container iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+
+        /* Footer */
+        footer {
+            background: var(--dark-gray);
+            color: var(--white);
+            padding: 3rem 2rem 1.5rem;
+        }
+
+        .footer-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .footer-content p {
+            opacity: 0.8;
+            font-size: 0.95rem;
+        }
+
+        .footer-content .logo {
+            margin-bottom: 1rem;
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s ease;
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 1200px) {
+            .services-grid,
+            .projects-grid,
+            .testimonials-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .why-us-grid,
+            .stats-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .menu-toggle {
+                display: flex;
+            }
+
+            .nav-links {
+                position: fixed;
+                top: 70px;
+                left: -100%;
+                flex-direction: column;
+                background: rgba(26, 26, 26, 0.98);
+                width: 100%;
+                padding: 2rem;
+                gap: 1.5rem;
+                transition: left 0.3s ease;
+            }
+
+            .nav-links.active {
+                left: 0;
+            }
+
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .hero p {
+                font-size: 1.1rem;
+            }
+
+            .section-title h2 {
+                font-size: 2rem;
+            }
+
+            .about-grid,
+            .contact-container {
+                grid-template-columns: 1fr;
+            }
+
+            .about-features {
+                grid-template-columns: 1fr;
+            }
+
+            .services-grid,
+            .projects-grid,
+            .why-us-grid,
+            .stats-grid,
+            .testimonials-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .about-image {
+                height: 400px;
+            }
+
+            section {
+                padding: 4rem 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav id="navbar">
+        <div class="nav-container">
+            <div class="logo">Pro<span>Build</span></div>
+            <div class="menu-toggle" id="menuToggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="#home">Početna</a></li>
+                <li><a href="#o-nama">O Nama</a></li>
+                <li><a href="#usluge">Usluge</a></li>
+                <li><a href="#projekti">Projekti</a></li>
+                <li><a href="#recenzije">Recenzije</a></li>
+                <li><a href="#kontakt">Kontakt</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="hero-content">
+            <h1>Gradimo <span>kvalitetu</span> koja traje.</h1>
+            <p>S više od 15 godina iskustva u građevinskoj industriji, transformiramo vaše vizije u stvarnost koristeći najkvalitetnije materijale i najnovije tehnologije.</p>
+            <a href="#kontakt" class="cta-button">Zatraži ponudu</a>
+        </div>
+    </section>
+
+    <!-- O Nama -->
+    <section id="o-nama">
+        <div class="container">
+            <div class="section-title fade-in">
+                <h2>O <span>Nama</span></h2>
+                <p>Tvrtka izgrađena na povjerenju, iskustvu i predanosti izvrsnosti.</p>
+            </div>
+            <div class="about-grid">
+                <div class="about-content fade-in">
+                    <h3>Vaš pouzdani partner u građevinarstvu</h3>
+                    <p>ProBuild je vodeća građevinska tvrtka koja posluje od 2008. godine. Specijalizirani smo za kompleksne građevinske projekte, od novogradnje do potpunih adaptacija i renovacija.</p>
+                    <p>Naš tim certificiranih stručnjaka koristi samo premium materijale i najnovije građevinske tehnologije kako bi osigurali da svaki projekt nadmašuje očekivanja naših klijenata.</p>
+                    <div class="about-features">
+                        <div class="feature-item fade-in">
+                            <h4>15+ Godina</h4>
+                            <p>Iskustva u građevinskoj industriji</p>
+                        </div>
+                        <div class="feature-item fade-in">
+                            <h4>Certificirani Tim</h4>
+                            <p>Svi licencirani građevinski stručnjaci</p>
+                        </div>
+                        <div class="feature-item fade-in">
+                            <h4>ISO 9001</h4>
+                            <p>Certifikacija kvalitete i sigurnosti</p>
+                        </div>
+                        <div class="feature-item fade-in">
+                            <h4>Premium Materijali</h4>
+                            <p>Samo najbolje od najboljih</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="about-image fade-in" style="background-image: url('https://images.unsplash.com/photo-1587582423116-ec07293f0395?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D');"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Usluge -->
+    <section id="usluge">
+        <div class="container">
+            <div class="section-title fade-in">
+                <h2>Naše <span>Usluge</span></h2>
+                <p>Sveobuhvatna rješenja za sve vaše građevinske potrebe.</p>
+            </div>
+            <div class="services-grid">
+                <div class="service-card fade-in">
+                    <div class="service-image" style="background-image: url('https://images.unsplash.com/photo-1503387762-592deb58ef4e?w=600&q=80');"></div>
+                    <div class="service-content">
+                        <h3>Novogradnja</h3>
+                        <p>Izgradnja stambenih i poslovnih objekata od temelja prema vašim specifikacijama s naglaskom na kvalitetu i trajnost.</p>
+                        <a href="#kontakt" class="service-link">Saznaj više →</a>
+                    </div>
+                </div>
+                <div class="service-card fade-in">
+                    <div class="service-image" style="background-image: url('https://images.unsplash.com/photo-1595844730289-b248c919d6f9?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Nnx8YnVpbGRlcnxlbnwwfHwwfHx8MA%3D%3D');"></div>
+                    <div class="service-content">
+                        <h3>Adaptacije</h3>
+                        <p>Potpune adaptacije i rekonstrukcije postojećih prostora, transformirajući ih u moderne i funkcionalne površine.</p>
+                        <a href="#kontakt" class="service-link">Saznaj više →</a>
+                    </div>
+                </div>
+                <div class="service-card fade-in">
+                    <div class="service-image" style="background-image: url('https://plus.unsplash.com/premium_photo-1683140940649-71864ae8156e?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NXx8cm9vZmluZ3xlbnwwfHwwfHx8MA%3D%3D');"></div>
+                    <div class="service-content">
+                        <h3>Krovopokrivački radovi</h3>
+                        <p>Profesionalna ugradnja i sanacija svih vrsta krovova s fokusom na vodootpornost i energetsku učinkovitost.</p>
+                        <a href="#kontakt" class="service-link">Saznaj više →</a>
+                    </div>
+                </div>
+                <div class="service-card fade-in">
+                    <div class="service-image" style="background-image: url('https://images.unsplash.com/photo-1607400201889-565b1ee75f8e?w=600&q=80');"></div>
+                    <div class="service-content">
+                        <h3>Fasaderski radovi</h3>
+                        <p>Vrhunsko oblaganje i izolacija fasada korištenjem najsuvremenijih materijala i tehnika.</p>
+                        <a href="#kontakt" class="service-link">Saznaj više →</a>
+                    </div>
+                </div>
+                <div class="service-card fade-in">
+                    <div class="service-image" style="background-image: url('https://plus.unsplash.com/premium_photo-1683121530725-e9ddd6c74ef1?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8OXx8Y2VtZW50aW5nfGVufDB8fDB8fHww');"></div>
+                    <div class="service-content">
+                        <h3>Betonski radovi</h3>
+                        <p>Precizno izvođenje betonskih konstrukcija, temelja, podova i armiranobetonskih elemenata.</p>
+                        <a href="#kontakt" class="service-link">Saznaj više →</a>
+                    </div>
+                </div>
+                <div class="service-card fade-in">
+                    <div class="service-image" style="background-image: url('https://images.unsplash.com/photo-1615529182904-14819c35db37?w=600&q=80');"></div>
+                    <div class="service-content">
+                        <h3>Završni interijerski radovi</h3>
+                        <p>Kompletno uređenje interijera uključujući gletanje, bojanje, postavljanje podova i keramike.</p>
+                        <a href="#kontakt" class="service-link">Saznaj više →</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projekti -->
+    <section id="projekti">
+        <div class="container">
+            <div class="section-title fade-in">
+                <h2>Naši <span>Projekti</span></h2>
+                <p>Portfelj uspješno realiziranih projekata koji govore sami za sebe.</p>
+            </div>
+            <div class="projects-grid">
+                <div class="project-card fade-in">
+                    <div class="project-image" style="background-image: url('https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=600&q=80');"></div>
+                    <div class="project-overlay">
+                        <h3>Moderna vila Zagreb</h3>
+                        <p>Luksuzna stambena građevina • 450m²</p>
+                    </div>
+                </div>
+                <div class="project-card fade-in">
+                    <div class="project-image" style="background-image: url('https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=600&q=80');"></div>
+                    <div class="project-overlay">
+                        <h3>Poslovni kompleks</h3>
+                        <p>Komercijalni prostor • 1200m²</p>
+                    </div>
+                </div>
+                <div class="project-card fade-in">
+                    <div class="project-image" style="background-image: url('https://images.unsplash.com/photo-1600566753086-00f18fb6b3ea?w=600&q=80');"></div>
+                    <div class="project-overlay">
+                        <h3>Stambena zgrada</h3>
+                        <p>Višekatnica • 12 stanova</p>
+                    </div>
+                </div>
+                <div class="project-card fade-in">
+                    <div class="project-image" style="background-image: url('https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?w=600&q=80');"></div>
+                    <div class="project-overlay">
+                        <h3>Renovacija obiteljske kuće</h3>
+                        <p>Kompletna adaptacija • 280m²</p>
+                    </div>
+                </div>
+                <div class="project-card fade-in">
+                    <div class="project-image" style="background-image: url('https://images.unsplash.com/photo-1600047509807-ba8f99d2cdde?w=600&q=80');"></div>
+                    <div class="project-overlay">
+                        <h3>Industrijska hala</h3>
+                        <p>Skladišni prostor • 2500m²</p>
+                    </div>
+                </div>
+                <div class="project-card fade-in">
+                    <div class="project-image" style="background-image: url('https://images.unsplash.com/photo-1600585154526-990dced4db0d?w=600&q=80');"></div>
+                    <div class="project-overlay">
+                        <h3>Luksuzni apartmani</h3>
+                        <p>Premium stambeni kompleks • 8 jedinica</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Zašto Odabrati Nas -->
+    <section id="zasto-mi">
+        <div class="container">
+            <div class="section-title fade-in">
+                <h2>Zašto <span>Odabrati Nas</span></h2>
+                <p>Razlozi zbog kojih smo prvi izbor za građevinske projekte.</p>
+            </div>
+            <div class="why-us-grid">
+                <div class="why-card fade-in">
+                    <div class="why-icon">👷</div>
+                    <h3>Iskusan Tim</h3>
+                    <p>Certificirani majstori s prosječno 12 godina iskustva koji garantiraju vrhunsku izvedbu.</p>
+                </div>
+                <div class="why-card fade-in">
+                    <div class="why-icon">⏱️</div>
+                    <h3>Poštivanje Rokova</h3>
+                    <p>98% projekata završavamo u dogovorenom roku ili prije - vaše vrijeme je naša prioritet.</p>
+                </div>
+                <div class="why-card fade-in">
+                    <div class="why-icon">🏆</div>
+                    <h3>Premium Materijali</h3>
+                    <p>Koristimo isključivo certificirane materijale vodećih svjetskih proizvođača.</p>
+                </div>
+                <div class="why-card fade-in">
+                    <div class="why-icon">✓</div>
+                    <h3>Garantirana Kvaliteta</h3>
+                    <p>5 godina garancije na sve radove i 10 godina na konstrukcijske elemente.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Statistika -->
+    <section id="statistika">
+        <div class="container">
+            <div class="section-title fade-in">
+                <h2 style="color: white;">Naši <span>Rezultati</span></h2>
+                <p style="color: rgba(255,255,255,0.8);">Brojke koje govore o našem uspjehu i posvećenosti.</p>
+            </div>
+            <div class="stats-grid">
+                <div class="stat-item fade-in">
+                    <div class="stat-number" data-target="387">0</div>
+                    <div class="stat-label">Završeni projekti</div>
+                </div>
+                <div class="stat-item fade-in">
+                    <div class="stat-number" data-target="15">0</div>
+                    <div class="stat-label">Godine iskustva</div>
+                </div>
+                <div class="stat-item fade-in">
+                    <div class="stat-number" data-target="362">0</div>
+                    <div class="stat-label">Zadovoljni klijenti</div>
+                </div>
+                <div class="stat-item fade-in">
+                    <div class="stat-number" data-target="48">0</div>
+                    <div class="stat-label">Članovi tima</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Recenzije -->
+    <section id="recenzije">
+        <div class="container">
+            <div class="section-title fade-in">
+                <h2>Što Kažu <span>Naši Klijenti</span></h2>
+                <p>Povjerenje naših klijenata je naša najveća nagrada.</p>
+            </div>
+            <div class="testimonials-grid">
+                <div class="testimonial-card fade-in">
+                    <div class="testimonial-quote">"</div>
+                    <div class="testimonial-text">
+                        Izgradnja naše obiteljske kuće bila je kompleksan projekt, ali ProBuild tim sve je učinio besprijekorno. Profesionalnost, točnost i kvaliteta su bili na najvišoj razini. Toplo preporučujem!
+                    </div>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">MK</div>
+                        <div class="author-info">
+                            <h4>Marko Kovačević</h4>
+                            <p>Vlasnik obiteljske kuće</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="testimonial-card fade-in">
+                    <div class="testimonial-quote">"</div>
+                    <div class="testimonial-text">
+                        Adaptacija našeg poslovnog prostora završena je prije roka i rezultat je nadmašio sva očekivanja. Tim je bio iznimno kooperativan i profesionalan. Definitivno ćemo ih ponovno angažirati.
+                    </div>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">AN</div>
+                        <div class="author-info">
+                            <h4>Ana Novak</h4>
+                            <p>Direktorica IT tvrtke</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="testimonial-card fade-in">
+                    <div class="testimonial-quote">"</div>
+                    <div class="testimonial-text">
+                        Pet godina nakon završetka projekta, sve je kao novo. Kvaliteta materijala i izvođenja radova su impresivni. ProBuild postavlja standarde u građevinskoj industriji.
+                    </div>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">IB</div>
+                        <div class="author-info">
+                            <h4>Ivan Barić</h4>
+                            <p>Investitor</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Kontakt -->
+    <section id="kontakt">
+        <div class="container">
+            <div class="section-title fade-in">
+                <h2>Kontaktirajte <span>Nas</span></h2>
+                <p>Spremni smo odgovoriti na sva vaša pitanja i započeti vaš projekt.</p>
+            </div>
+            <div class="contact-container">
+                <div class="contact-form fade-in">
+                    <form id="contactForm">
+                        <div class="form-group">
+                            <label for="name">Ime i prezime *</label>
+                            <input type="text" id="name" name="name" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Email adresa *</label>
+                            <input type="email" id="email" name="email" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="phone">Telefon</label>
+                            <input type="tel" id="phone" name="phone">
+                        </div>
+                        <div class="form-group">
+                            <label for="message">Vaša poruka *</label>
+                            <textarea id="message" name="message" required></textarea>
+                        </div>
+                        <button type="submit" class="submit-button">Pošalji upit</button>
+                    </form>
+                </div>
+                <div class="contact-info fade-in">
+                    <div class="info-item">
+                        <div class="info-icon">📍</div>
+                        <div class="info-content">
+                            <h3>Adresa</h3>
+                            <p>Vukovarska ulica 78<br>10000 Zagreb, Hrvatska</p>
+                        </div>
+                    </div>
+                    <div class="info-item">
+                        <div class="info-icon">📞</div>
+                        <div class="info-content">
+                            <h3>Telefon</h3>
+                            <p>+385 1 234 5678<br>+385 98 765 4321</p>
+                        </div>
+                    </div>
+                    <div class="info-item">
+                        <div class="info-icon">✉️</div>
+                        <div class="info-content">
+                            <h3>Email</h3>
+                            <p>info@probuild.hr<br>projekti@probuild.hr</p>
+                        </div>
+                    </div>
+                    <div class="info-item">
+                        <div class="info-icon">🕐</div>
+                        <div class="info-content">
+                            <h3>Radno vrijeme</h3>
+                            <p>Pon - Pet: 08:00 - 17:00<br>Sub: 09:00 - 13:00</p>
+                        </div>
+                    </div>
+                    <div class="map-container">
+                        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2781.4869337086567!2d15.9819!3d45.8131!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x4765d68f8f89b36d%3A0x4e646c9e32c6c0e7!2sZagreb%2C%20Croatia!5e0!3m2!1sen!2s!4v1234567890" allowfullscreen="" loading="lazy"></iframe>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="logo">Pro<span>Build</span></div>
+            <p>&copy; 2024 ProBuild d.o.o. Sva prava pridržana.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile Menu Toggle
+        const menuToggle = document.getElementById('menuToggle');
+        const navLinks = document.getElementById('navLinks');
+
+        menuToggle.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+        });
+
+        // Close mobile menu when clicking on a link
+        document.querySelectorAll('.nav-links a').forEach(link => {
+            link.addEventListener('click', () => {
+                navLinks.classList.remove('active');
+            });
+        });
+
+        // Sticky Navigation
+        const navbar = document.getElementById('navbar');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 100) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
+
+        // Scroll Animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.fade-in').forEach(el => {
+            observer.observe(el);
+        });
+
+        // Counter Animation
+        const counters = document.querySelectorAll('.stat-number');
+        let hasAnimated = false;
+
+        const animateCounters = () => {
+            counters.forEach(counter => {
+                const target = parseInt(counter.getAttribute('data-target'));
+                const duration = 2000;
+                const increment = target / (duration / 16);
+                let current = 0;
+
+                const updateCounter = () => {
+                    if (current < target) {
+                        current += increment;
+                        counter.textContent = Math.floor(current);
+                        requestAnimationFrame(updateCounter);
+                    } else {
+                        counter.textContent = target + '+';
+                    }
+                };
+
+                updateCounter();
+            });
+        };
+
+        const statsSection = document.getElementById('statistika');
+        const statsObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting && !hasAnimated) {
+                    animateCounters();
+                    hasAnimated = true;
+                }
+            });
+        }, { threshold: 0.5 });
+
+        if (statsSection) {
+            statsObserver.observe(statsSection);
+        }
+
+        // Form Submission
+        document.getElementById('contactForm').addEventListener('submit', (e) => {
+            e.preventDefault();
+            
+            const name = document.getElementById('name').value;
+            const email = document.getElementById('email').value;
+            const phone = document.getElementById('phone').value;
+            const message = document.getElementById('message').value;
+
+            alert(`Hvala ${name}! Vaša poruka je uspješno poslana. Kontaktirati ćemo vas u najkraćem mogućem roku.`);
+            
+            e.target.reset();
+        });
+
+        // Smooth Scroll
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    window.scrollTo({
+                        top: target.offsetTop - 70,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>
